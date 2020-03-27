@@ -217,4 +217,39 @@ public class SomeTest {
 		assertEquals(expectedOut, outContent.toString());
 		System.setOut(originalOut);
 	}
+
+	@Test
+	public void testThatTheGameReturnsTheSameResultWhenHavingThreePlayersAndRollingSix() {
+		int randomRoll = 6;
+		PrintStream originalOut = System.out;
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		String expectedOut = "Chet was added\r\n" +
+				"They are player number 1\r\n" +
+				"Pat was added\r\n" +
+				"They are player number 2\r\n" +
+				"Sue was added\r\n" +
+				"They are player number 3\r\n" +
+				"Chet is the current player\r\n" +
+				"They have rolled a 6\r\n" +
+				"Chet's new location is 6\r\n" +
+				"The category is Sports\r\n" +
+				"Sports Question 0\r\n" +
+				"Question was incorrectly answered\r\n" +
+				"Chet was sent to the penalty box\r\n";
+
+		Game aGame = new Game();
+		aGame.add("Chet");
+		aGame.add("Pat");
+		aGame.add("Sue");
+
+
+		aGame.roll(randomRoll);
+
+		boolean notAWinner = aGame.wrongAnswer();
+
+		assertTrue(notAWinner);
+		assertEquals(expectedOut, outContent.toString());
+		System.setOut(originalOut);
+	}
 }

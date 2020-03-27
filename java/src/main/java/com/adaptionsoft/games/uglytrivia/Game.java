@@ -86,7 +86,7 @@ public class Game {
         System.out.println("The category is " + currentCategory());
     }
 
-    private int calculateNewPlace(int roll, int currentPlace) {
+    private static int calculateNewPlace(int roll, int currentPlace) {
         int playerNewPlace = currentPlace + roll;
         if (playerNewPlace > 11) {
             playerNewPlace = playerNewPlace - 12;

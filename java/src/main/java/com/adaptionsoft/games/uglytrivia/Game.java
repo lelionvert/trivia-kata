@@ -77,21 +77,13 @@ public class Game {
     }
 
     private void movePlayer(int roll) {
-        int playerNewPlace = calculateNewPlace(roll, places[currentPlayer]);
+        int playerNewPlace = Player.calculateNewPlace(roll, places[currentPlayer]);
 
         places[currentPlayer] = playerNewPlace;
         System.out.println(players.get(currentPlayer)
                 + "'s new location is "
                 + playerNewPlace);
         System.out.println("The category is " + currentCategory());
-    }
-
-    private static int calculateNewPlace(int roll, int currentPlace) {
-        int playerNewPlace = currentPlace + roll;
-        if (playerNewPlace > 11) {
-            playerNewPlace = playerNewPlace - 12;
-        }
-        return playerNewPlace;
     }
 
     private void askQuestion() {

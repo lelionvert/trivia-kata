@@ -61,7 +61,7 @@ public class Game {
                 isGettingOutOfPenaltyBox = true;
                 System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
 
-                movePlayer(roll);
+                Player.movePlayer(this, roll);
                 askQuestion();
             } else {
                 System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
@@ -70,47 +70,23 @@ public class Game {
 
         } else {
 
-            movePlayer(roll);
+            Player.movePlayer(this, roll);
             askQuestion();
         }
 
     }
 
-    private void movePlayer(int roll) {
-        int playerNewPlace = Player.calculateNewPlace(roll, places[currentPlayer]);
-
-        places[currentPlayer] = playerNewPlace;
-        System.out.println(players.get(currentPlayer)
-                + "'s new location is "
-                + playerNewPlace);
-        System.out.println("The category is " + currentCategory());
-    }
-
     private void askQuestion() {
-        if (currentCategory().equals("Pop"))
+        if (Player.currentCategory(currentPlayer, places).equals("Pop"))
             System.out.println(popQuestions.removeFirst());
-        if (currentCategory().equals("Science"))
+        if (Player.currentCategory(currentPlayer, places).equals("Science"))
             System.out.println(scienceQuestions.removeFirst());
-        if (currentCategory().equals("Sports"))
+        if (Player.currentCategory(currentPlayer, places).equals("Sports"))
             System.out.println(sportsQuestions.removeFirst());
-        if (currentCategory().equals("Rock"))
+        if (Player.currentCategory(currentPlayer, places).equals("Rock"))
             System.out.println(rockQuestions.removeFirst());
     }
 
-
-    private String currentCategory() {
-
-        switch (places[currentPlayer] % 4) {
-            case 0:
-                return "Pop";
-            case 1:
-                return "Science";
-            case 2:
-                return "Sports";
-            default:
-                return "Rock";
-        }
-    }
 
     public boolean wasCorrectlyAnswered() {
         boolean didPlayerWin;

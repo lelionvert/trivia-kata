@@ -234,5 +234,4 @@ public class SomeTest {
 		assertThat(expectedOut).isEqualTo(outContent.toString());
 		System.setOut(originalOut);
 	}
-
 }

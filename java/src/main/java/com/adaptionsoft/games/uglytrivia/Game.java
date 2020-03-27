@@ -57,10 +57,12 @@ public class Game {
 		
 		if (inPenaltyBox[currentPlayer]) {
 			if (roll % 2 != 0) {
+
 				isGettingOutOfPenaltyBox = true;
-				
 				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-				leafOne(roll);
+
+				movePlayer(roll);
+				askQuestion();
 			} else {
 				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
 				isGettingOutOfPenaltyBox = false;
@@ -68,12 +70,13 @@ public class Game {
 			
 		} else {
 
-			leafOne(roll);
+			movePlayer(roll);
+			askQuestion();
 		}
 		
 	}
 
-	private void leafOne(int roll) {
+	private void movePlayer(int roll) {
 		places[currentPlayer] = places[currentPlayer] + roll;
 		if (places[currentPlayer] > 11) {
 			places[currentPlayer] = places[currentPlayer] - 12;
@@ -83,7 +86,6 @@ public class Game {
 				+ "'s new location is "
 				+ places[currentPlayer]);
 		System.out.println("The category is " + currentCategory());
-		askQuestion();
 	}
 
 	private void askQuestion() {
@@ -123,13 +125,11 @@ public class Game {
 						+ " Gold Coins.");
 				
 				boolean winner = didPlayerWin();
-				currentPlayer++;
-				if (currentPlayer == players.size()) currentPlayer = 0;
-				
+				getNextPlayer();
+
 				return winner;
 			} else {
-				currentPlayer++;
-				if (currentPlayer == players.size()) currentPlayer = 0;
+				getNextPlayer();
 				return true;
 			}
 			
@@ -145,21 +145,30 @@ public class Game {
 					+ " Gold Coins.");
 			
 			boolean winner = didPlayerWin();
-			currentPlayer++;
-			if (currentPlayer == players.size()) currentPlayer = 0;
-			
+			getNextPlayer();
+
 			return winner;
 		}
 	}
 	
 	public boolean wrongAnswer(){
 		System.out.println("Question was incorrectly answered");
+
+		putPlayerInPenaltyBox();
+
+		getNextPlayer();
+
+		return true;
+	}
+
+	private void putPlayerInPenaltyBox() {
 		System.out.println(players.get(currentPlayer)+ " was sent to the penalty box");
 		inPenaltyBox[currentPlayer] = true;
-		
+	}
+
+	private void getNextPlayer() {
 		currentPlayer++;
 		if (currentPlayer == players.size()) currentPlayer = 0;
-		return true;
 	}
 
 

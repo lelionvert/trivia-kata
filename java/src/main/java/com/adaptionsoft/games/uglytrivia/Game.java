@@ -31,23 +31,23 @@ public class Game {
     }
 
     public boolean isPlayable() {
-        return (howManyPlayers() >= 2);
+        return (numberOfPlayers() >= 2);
     }
 
     public boolean add(String playerName) {
 
 
         players.add(playerName);
-        places[howManyPlayers()] = 0;
-        purses[howManyPlayers()] = 0;
-        inPenaltyBox[howManyPlayers()] = false;
+        places[numberOfPlayers()] = 0;
+        purses[numberOfPlayers()] = 0;
+        inPenaltyBox[numberOfPlayers()] = false;
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
         return true;
     }
 
-    public int howManyPlayers() {
+    public int numberOfPlayers() {
         return players.size();
     }
 
@@ -55,7 +55,7 @@ public class Game {
         System.out.println(players.get(currentPlayer) + " is the current player");
         System.out.println("They have rolled a " + roll);
 
-        if (inPenaltyBox[currentPlayer]) {
+        if (isPlayerInPenaltyBox()) {
             if (roll % 2 != 0) {
 
                 isGettingOutOfPenaltyBox = true;
@@ -116,7 +116,7 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         boolean didPlayerWin;
-        if (inPenaltyBox[currentPlayer]) {
+        if (isPlayerInPenaltyBox()) {
 
             didPlayerWin = true;
 
@@ -136,7 +136,11 @@ public class Game {
         return didPlayerWin;
     }
 
-    private void earnCoin() {
+	private boolean isPlayerInPenaltyBox() {
+		return inPenaltyBox[currentPlayer];
+	}
+
+	private void earnCoin() {
         purses[currentPlayer]++;
         System.out.println(players.get(currentPlayer)
                 + " now has "

@@ -7,7 +7,6 @@ public class Game {
     private final Players players;
     ArrayList<String> playerNames = new ArrayList<>();
     int[] places = new int[6];
-    int[] purses = new int[6];
     boolean[] inPenaltyBox = new boolean[6];
 
     LinkedList<String> popQuestions = new LinkedList<>();
@@ -25,7 +24,7 @@ public class Game {
             sportsQuestions.addLast(("Sports Question " + i));
             rockQuestions.addLast(createRockQuestion(i));
         }
-        players = new Players(playerNames, purses);
+        players = new Players(playerNames);
     }
 
     int calculateNewPlace(int roll, int currentPlace) {

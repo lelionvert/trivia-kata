@@ -7,9 +7,9 @@ public class Players {
     private ArrayList<String> names;
     private int[] purses;
 
-    public Players(ArrayList<String> names, int[] purses) {
+    public Players(ArrayList<String> names) {
         this.names = names;
-        this.purses = purses;
+        this.purses = new int[6];
     }
 
     boolean didPlayerWin(int currentPlayer) {

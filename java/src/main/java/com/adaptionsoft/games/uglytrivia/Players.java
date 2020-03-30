@@ -16,8 +16,9 @@ public class Players {
         return purs + 1;
     }
 
-    static boolean didPlayerWin(int currentPlayer, int[] purses) {
-        return !(purses[currentPlayer] == 6);
+    boolean didPlayerWin(int currentPlayer) {
+
+        return !(this.purses[currentPlayer] == 6);
     }
 
     boolean isDidPlayerWin(int currentPlayer, boolean isGettingOutOfPenaltyBox, boolean inPenaltyBox) {
@@ -33,7 +34,7 @@ public class Players {
                         + this.purses[currentPlayer]
                         + " Gold Coins.");
 
-                didPlayerWin = didPlayerWin(currentPlayer, this.purses);
+                didPlayerWin = this.didPlayerWin(currentPlayer);
             }
         } else {
             System.out.println("Answer was corrent!!!!");
@@ -43,7 +44,7 @@ public class Players {
                     + this.purses[currentPlayer]
                     + " Gold Coins.");
 
-            didPlayerWin = didPlayerWin(currentPlayer, this.purses);
+            didPlayerWin = this.didPlayerWin(currentPlayer);
         }
         return didPlayerWin;
     }

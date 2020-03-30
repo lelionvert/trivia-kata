@@ -121,41 +121,9 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         boolean didPlayerWin;
-        didPlayerWin = isDidPlayerWin(isGettingOutOfPenaltyBox, inPenaltyBox[currentPlayer]);
+        didPlayerWin = Players.isDidPlayerWin(currentPlayer, players, purses, isGettingOutOfPenaltyBox, inPenaltyBox[currentPlayer]);
         getNextPlayer();
         return didPlayerWin;
-    }
-
-    private boolean isDidPlayerWin(boolean isGettingOutOfPenaltyBox, boolean inPenaltyBox) {
-        boolean didPlayerWin;
-        if (inPenaltyBox) {
-            didPlayerWin = true;
-
-            if (isGettingOutOfPenaltyBox) {
-                System.out.println("Answer was correct!!!!");
-                purses[currentPlayer] = earnCoin(purses[currentPlayer]);
-                System.out.println(players.get(currentPlayer)
-                        + " now has "
-                        + purses[currentPlayer]
-                        + " Gold Coins.");
-
-                didPlayerWin = didPlayerWin();
-            }
-        } else {
-            System.out.println("Answer was corrent!!!!");
-            purses[currentPlayer] = earnCoin(purses[currentPlayer]);
-            System.out.println(players.get(currentPlayer)
-                    + " now has "
-                    + purses[currentPlayer]
-                    + " Gold Coins.");
-
-            didPlayerWin = didPlayerWin();
-        }
-        return didPlayerWin;
-    }
-
-    private int earnCoin(int purs) {
-        return purs + 1;
     }
 
     public boolean wrongAnswer() {
@@ -178,7 +146,4 @@ public class Game {
         if (currentPlayer == players.size()) currentPlayer = 0;
     }
 
-    private boolean didPlayerWin() {
-        return !(purses[currentPlayer] == 6);
-    }
 }

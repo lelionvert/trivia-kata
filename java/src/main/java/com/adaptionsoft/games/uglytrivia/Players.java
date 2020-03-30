@@ -5,11 +5,14 @@ import java.util.ArrayList;
 public class Players {
 
     private ArrayList<String> names;
+    private int[] places;
     private int[] purses;
     private boolean[] inPenaltyBox;
 
-    public Players(ArrayList<String> names) {
+
+    public Players(ArrayList<String> names, int[] places) {
         this.names = names;
+        this.places = places;
         this.inPenaltyBox = new boolean[6];
         this.purses = new int[6];
     }
@@ -66,5 +69,19 @@ public class Players {
 
     void initPenaltyBox() {
         inPenaltyBox[names.size()] = false;
+    }
+
+    int getPlayerNewPlace(int roll, Game game) {
+        int playerNewPlace = calculateNewPlace(roll, places[game.currentPlayer]);
+        places[game.currentPlayer] = playerNewPlace;
+        return playerNewPlace;
+    }
+
+    int calculateNewPlace(int roll, int currentPlace) {
+        int playerNewPlace = currentPlace + roll;
+        if (playerNewPlace > 11) {
+            playerNewPlace = playerNewPlace - 12;
+        }
+        return playerNewPlace;
     }
 }

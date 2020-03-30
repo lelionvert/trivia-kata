@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
-    private final Players players;
+    final Players players;
     ArrayList<String> playerNames = new ArrayList<>();
     int[] places = new int[6];
 
@@ -23,15 +23,7 @@ public class Game {
             sportsQuestions.addLast(("Sports Question " + i));
             rockQuestions.addLast(createRockQuestion(i));
         }
-        players = new Players(playerNames);
-    }
-
-    int calculateNewPlace(int roll, int currentPlace) {
-        int playerNewPlace = currentPlace + roll;
-        if (playerNewPlace > 11) {
-            playerNewPlace = playerNewPlace - 12;
-        }
-        return playerNewPlace;
+        players = new Players(playerNames, places);
     }
 
     String currentCategory(int currentPlayer, int[] places) {
@@ -46,16 +38,6 @@ public class Game {
             default:
                 return "Rock";
         }
-    }
-
-    void movePlayer(int roll) {
-        int playerNewPlace = calculateNewPlace(roll, places[currentPlayer]);
-
-        places[currentPlayer] = playerNewPlace;
-        System.out.println(playerNames.get(currentPlayer)
-                + "'s new location is "
-                + playerNewPlace);
-        System.out.println("The category is " + currentCategory(currentPlayer, places));
     }
 
     public String createRockQuestion(int index) {
@@ -87,7 +69,12 @@ public class Game {
                 isGettingOutOfPenaltyBox = true;
                 System.out.println(playerNames.get(currentPlayer) + " is getting out of the penalty box");
 
-                this.movePlayer(roll);
+                int playerNewPlace = players.getPlayerNewPlace(roll, this);
+
+                System.out.println(playerNames.get(currentPlayer)
+                        + "'s new location is "
+                        + playerNewPlace);
+                System.out.println("The category is " + currentCategory(currentPlayer, places));
                 askQuestion();
             } else {
                 System.out.println(playerNames.get(currentPlayer) + " is not getting out of the penalty box");
@@ -96,7 +83,12 @@ public class Game {
 
         } else {
 
-            this.movePlayer(roll);
+            int playerNewPlace = players.getPlayerNewPlace(roll, this);
+
+            System.out.println(playerNames.get(currentPlayer)
+                    + "'s new location is "
+                    + playerNewPlace);
+            System.out.println("The category is " + currentCategory(currentPlayer, places));
             askQuestion();
         }
 

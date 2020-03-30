@@ -6,7 +6,6 @@ import java.util.LinkedList;
 public class Game {
     final Players players;
     ArrayList<String> playerNames = new ArrayList<>();
-    int[] places = new int[6];
 
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
@@ -23,7 +22,7 @@ public class Game {
             sportsQuestions.addLast(("Sports Question " + i));
             rockQuestions.addLast(createRockQuestion(i));
         }
-        players = new Players(playerNames, places);
+        players = new Players(playerNames);
     }
 
     String currentCategory(int currentPlayer) {

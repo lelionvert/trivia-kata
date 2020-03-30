@@ -7,7 +7,6 @@ public class Game {
     private final Players players;
     ArrayList<String> playerNames = new ArrayList<>();
     int[] places = new int[6];
-    boolean[] inPenaltyBox = new boolean[6];
 
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
@@ -24,7 +23,7 @@ public class Game {
             sportsQuestions.addLast(("Sports Question " + i));
             rockQuestions.addLast(createRockQuestion(i));
         }
-        players = new Players(playerNames, inPenaltyBox);
+        players = new Players(playerNames);
     }
 
     int calculateNewPlace(int roll, int currentPlace) {
@@ -71,7 +70,7 @@ public class Game {
 
         players.add(playerName);
         places[playerNames.size()] = 0;
-        players.initPenaltyBox(this);
+        players.initPenaltyBox();
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + playerNames.size());
@@ -82,7 +81,7 @@ public class Game {
         System.out.println(playerNames.get(currentPlayer) + " is the current player");
         System.out.println("They have rolled a " + roll);
 
-        if (players.isInPenaltyBox(this)) {
+        if (players.isInPenaltyBox(this.currentPlayer)) {
             if (roll % 2 != 0) {
 
                 isGettingOutOfPenaltyBox = true;
@@ -117,7 +116,7 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         boolean didPlayerWin;
-        didPlayerWin = players.isDidPlayerWin(currentPlayer, isGettingOutOfPenaltyBox, players.isInPenaltyBox(this));
+        didPlayerWin = players.isDidPlayerWin(currentPlayer, isGettingOutOfPenaltyBox, players.isInPenaltyBox(this.currentPlayer));
         getNextPlayer();
         return didPlayerWin;
     }
@@ -126,7 +125,7 @@ public class Game {
         System.out.println("Question was incorrectly answered");
 
         System.out.println(playerNames.get(currentPlayer) + " was sent to the penalty box");
-        players.putPlayerInPenaltyBox(this);
+        players.putPlayerInPenaltyBox(this.currentPlayer);
 
         getNextPlayer();
 

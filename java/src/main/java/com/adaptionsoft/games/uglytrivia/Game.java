@@ -51,8 +51,6 @@ public class Game {
     public boolean add(String playerName) {
 
         players.add(playerName);
-        players.addPlaces();
-        players.initPenaltyBox();
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + playerNames.size());

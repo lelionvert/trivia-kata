@@ -54,21 +54,12 @@ public class Players {
         this.purses[currentPlayer]++;
     }
 
-    void add(String playerName) {
-        names.add(playerName);
-        purses[names.size()] = 0;
-    }
-
     void putPlayerInPenaltyBox(int currentPlayer) {
         inPenaltyBox[currentPlayer] = true;
     }
 
     boolean isInPenaltyBox(int currentPlayer) {
         return inPenaltyBox[currentPlayer];
-    }
-
-    void initPenaltyBox() {
-        inPenaltyBox[names.size()] = false;
     }
 
     int getPlayerNewPlace(int roll, int currentPlayer) {
@@ -90,7 +81,10 @@ public class Players {
         return this.places[currentPlayer] % categoriesCount;
     }
 
-    void addPlaces() {
+    void add(String playerName) {
+        names.add(playerName);
+        purses[names.size()] = 0;
         places[names.size()] = 0;
+        inPenaltyBox[names.size()] = false;
     }
 }

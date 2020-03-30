@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 public class Players {
 
+    private ArrayList<String> names;
+
+    public Players(ArrayList<String> names) {
+
+        this.names = names;
+    }
+
     static int earnCoin(int purs) {
         return purs + 1;
     }
@@ -38,5 +45,9 @@ public class Players {
             didPlayerWin = didPlayerWin(currentPlayer, purses);
         }
         return didPlayerWin;
+    }
+
+    void addPlayerName(String playerName) {
+        names.add(playerName);
     }
 }

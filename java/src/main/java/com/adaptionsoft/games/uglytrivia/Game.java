@@ -65,23 +65,19 @@ public class Game {
     }
 
     public boolean isPlayable() {
-        return (numberOfPlayers() >= 2);
+        return (playerNames.size() >= 2);
     }
 
     public boolean add(String playerName) {
 
         players.addPlayerName(playerName);
-        players.addPurses(this);
-        places[numberOfPlayers()] = 0;
-        inPenaltyBox[numberOfPlayers()] = false;
+        players.addPurses();
+        places[playerNames.size()] = 0;
+        inPenaltyBox[playerNames.size()] = false;
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + playerNames.size());
         return true;
-    }
-
-    public int numberOfPlayers() {
-        return playerNames.size();
     }
 
     public void roll(int roll) {
@@ -123,7 +119,7 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         boolean didPlayerWin;
-        didPlayerWin = players.isDidPlayerWin(purses, currentPlayer, isGettingOutOfPenaltyBox, inPenaltyBox[currentPlayer]);
+        didPlayerWin = players.isDidPlayerWin(currentPlayer, isGettingOutOfPenaltyBox, inPenaltyBox[currentPlayer]);
         getNextPlayer();
         return didPlayerWin;
     }

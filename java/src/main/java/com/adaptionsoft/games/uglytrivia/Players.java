@@ -20,9 +20,8 @@ public class Players {
         return !(purses[currentPlayer] == 6);
     }
 
-    boolean isDidPlayerWin(int[] purses, int currentPlayer, boolean isGettingOutOfPenaltyBox, boolean inPenaltyBox) {
+    boolean isDidPlayerWin(int currentPlayer, boolean isGettingOutOfPenaltyBox, boolean inPenaltyBox) {
         boolean didPlayerWin;
-        this.purses = purses;
         if (inPenaltyBox) {
             didPlayerWin = true;
 
@@ -53,7 +52,7 @@ public class Players {
         names.add(playerName);
     }
 
-    void addPurses(Game game) {
-        purses[game.numberOfPlayers()] = 0;
+    void addPurses() {
+        purses[names.size()] = 0;
     }
 }

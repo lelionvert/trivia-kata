@@ -77,7 +77,6 @@ public class Players {
     }
 
     int getIndexCategory(int currentPlayer, int categoriesCount) {
-
         return this.places[currentPlayer] % categoriesCount;
     }
 
@@ -86,5 +85,13 @@ public class Players {
         purses[names.size()] = 0;
         places[names.size()] = 0;
         inPenaltyBox[names.size()] = false;
+    }
+
+    String currentPlayerName(int currentPlayer) {
+        return names.get(currentPlayer);
+    }
+
+    int countPlayers() {
+        return names.size();
     }
 }

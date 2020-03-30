@@ -56,20 +56,19 @@ public class Game {
     }
 
     public void roll(int roll) {
-        printCommand();
+        printCommand("%s is the current player");
         System.out.println("They have rolled a " + roll);
 
         if (players.isInPenaltyBox(this.currentPlayer)) {
             if (roll % 2 != 0) {
 
                 isGettingOutOfPenaltyBox = true;
-                System.out.println(players.currentPlayerName(currentPlayer) + " is getting out of the penalty box");
+                String format = "%s is getting out of the penalty box";
+                printCommand(format);
 
                 int playerNewPlace = players.getPlayerNewPlace(roll, this.currentPlayer);
 
-                System.out.println(players.currentPlayerName(currentPlayer)
-                        + "'s new location is "
-                        + playerNewPlace);
+                printCommand("%s's new location is " + playerNewPlace);
                 System.out.println("The category is " + currentCategory(currentPlayer));
                 askQuestion();
             } else {
@@ -90,9 +89,8 @@ public class Game {
 
     }
 
-    private void printCommand() {
+    private void printCommand(String format) {
 
-        String format = "%s is the current player";
         Consumer<String> consumer = System.out::println;
         int currentPlayer = this.currentPlayer;
 

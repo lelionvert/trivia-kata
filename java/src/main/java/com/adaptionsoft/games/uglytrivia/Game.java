@@ -1,7 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.function.Consumer;
 
 public class Game {
     final Players players;
@@ -56,7 +56,7 @@ public class Game {
     }
 
     public void roll(int roll) {
-        System.out.println(players.currentPlayerName(currentPlayer) + " is the current player");
+        printCommand();
         System.out.println("They have rolled a " + roll);
 
         if (players.isInPenaltyBox(this.currentPlayer)) {
@@ -88,6 +88,15 @@ public class Game {
             askQuestion();
         }
 
+    }
+
+    private void printCommand() {
+
+        String format = "%s is the current player";
+        Consumer<String> consumer = System.out::println;
+        int currentPlayer = this.currentPlayer;
+
+        players.printToto(format, consumer, currentPlayer);
     }
 
     private void askQuestion() {

@@ -1,6 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class Players {
 
@@ -93,5 +94,11 @@ public class Players {
 
     int countPlayers() {
         return names.size();
+    }
+
+    void printToto(String format, Consumer<String> consumer, int currentPlayer) {
+        String currentString = currentPlayerName(currentPlayer);
+        String x = String.format(format, currentString);
+        consumer.accept(x);
     }
 }

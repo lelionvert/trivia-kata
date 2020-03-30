@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 public class Players {
 
-    private ArrayList<String> names;
+    public ArrayList<String> names;
 
     public Players(ArrayList<String> names) {
-
         this.names = names;
     }
 
@@ -19,7 +18,7 @@ public class Players {
         return !(purses[currentPlayer] == 6);
     }
 
-    static boolean isDidPlayerWin(int currentPlayer, ArrayList<String> players, int[] purses, boolean isGettingOutOfPenaltyBox, boolean inPenaltyBox) {
+    boolean isDidPlayerWin(int currentPlayer, int[] purses, boolean isGettingOutOfPenaltyBox, boolean inPenaltyBox) {
         boolean didPlayerWin;
         if (inPenaltyBox) {
             didPlayerWin = true;
@@ -27,7 +26,7 @@ public class Players {
             if (isGettingOutOfPenaltyBox) {
                 System.out.println("Answer was correct!!!!");
                 purses[currentPlayer] = earnCoin(purses[currentPlayer]);
-                System.out.println(players.get(currentPlayer)
+                System.out.println(names.get(currentPlayer)
                         + " now has "
                         + purses[currentPlayer]
                         + " Gold Coins.");
@@ -37,7 +36,7 @@ public class Players {
         } else {
             System.out.println("Answer was corrent!!!!");
             purses[currentPlayer] = earnCoin(purses[currentPlayer]);
-            System.out.println(players.get(currentPlayer)
+            System.out.println(names.get(currentPlayer)
                     + " now has "
                     + purses[currentPlayer]
                     + " Gold Coins.");

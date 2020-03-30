@@ -25,7 +25,7 @@ public class Game {
             sportsQuestions.addLast(("Sports Question " + i));
             rockQuestions.addLast(createRockQuestion(i));
         }
-        players = new Players(playerNames);
+        players = new Players(playerNames, purses);
     }
 
     int calculateNewPlace(int roll, int currentPlace) {
@@ -71,8 +71,8 @@ public class Game {
     public boolean add(String playerName) {
 
         players.addPlayerName(playerName);
+        players.addPurses(this);
         places[numberOfPlayers()] = 0;
-        purses[numberOfPlayers()] = 0;
         inPenaltyBox[numberOfPlayers()] = false;
 
         System.out.println(playerName + " was added");
@@ -123,7 +123,7 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         boolean didPlayerWin;
-        didPlayerWin = players.isDidPlayerWin(currentPlayer, purses, isGettingOutOfPenaltyBox, inPenaltyBox[currentPlayer]);
+        didPlayerWin = players.isDidPlayerWin(purses, currentPlayer, isGettingOutOfPenaltyBox, inPenaltyBox[currentPlayer]);
         getNextPlayer();
         return didPlayerWin;
     }

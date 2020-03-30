@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class Players {
 
     public ArrayList<String> names;
+    public int[] purses;
 
-    public Players(ArrayList<String> names) {
+    public Players(ArrayList<String> names, int[] purses) {
         this.names = names;
+        this.purses = purses;
     }
 
     static int earnCoin(int purs) {
@@ -18,35 +20,40 @@ public class Players {
         return !(purses[currentPlayer] == 6);
     }
 
-    boolean isDidPlayerWin(int currentPlayer, int[] purses, boolean isGettingOutOfPenaltyBox, boolean inPenaltyBox) {
+    boolean isDidPlayerWin(int[] purses, int currentPlayer, boolean isGettingOutOfPenaltyBox, boolean inPenaltyBox) {
         boolean didPlayerWin;
+        this.purses = purses;
         if (inPenaltyBox) {
             didPlayerWin = true;
 
             if (isGettingOutOfPenaltyBox) {
                 System.out.println("Answer was correct!!!!");
-                purses[currentPlayer] = earnCoin(purses[currentPlayer]);
+                this.purses[currentPlayer] = earnCoin(this.purses[currentPlayer]);
                 System.out.println(names.get(currentPlayer)
                         + " now has "
-                        + purses[currentPlayer]
+                        + this.purses[currentPlayer]
                         + " Gold Coins.");
 
-                didPlayerWin = didPlayerWin(currentPlayer, purses);
+                didPlayerWin = didPlayerWin(currentPlayer, this.purses);
             }
         } else {
             System.out.println("Answer was corrent!!!!");
-            purses[currentPlayer] = earnCoin(purses[currentPlayer]);
+            this.purses[currentPlayer] = earnCoin(this.purses[currentPlayer]);
             System.out.println(names.get(currentPlayer)
                     + " now has "
-                    + purses[currentPlayer]
+                    + this.purses[currentPlayer]
                     + " Gold Coins.");
 
-            didPlayerWin = didPlayerWin(currentPlayer, purses);
+            didPlayerWin = didPlayerWin(currentPlayer, this.purses);
         }
         return didPlayerWin;
     }
 
     void addPlayerName(String playerName) {
         names.add(playerName);
+    }
+
+    void addPurses(Game game) {
+        purses[game.numberOfPlayers()] = 0;
     }
 }

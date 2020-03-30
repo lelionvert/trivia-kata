@@ -10,8 +10,8 @@ public class Players {
     private boolean[] inPenaltyBox;
 
 
-    public Players(ArrayList<String> names) {
-        this.names = names;
+    public Players() {
+        this.names = new ArrayList<>();
         this.places = new int[6];
         this.inPenaltyBox = new boolean[6];
         this.purses = new int[6];

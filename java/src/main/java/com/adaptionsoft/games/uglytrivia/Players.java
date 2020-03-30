@@ -6,9 +6,11 @@ public class Players {
 
     private ArrayList<String> names;
     private int[] purses;
+    private boolean[] inPenaltyBox;
 
-    public Players(ArrayList<String> names) {
+    public Players(ArrayList<String> names, boolean[] inPenaltyBox) {
         this.names = names;
+        this.inPenaltyBox = inPenaltyBox;
         this.purses = new int[6];
     }
 
@@ -52,5 +54,17 @@ public class Players {
     void add(String playerName) {
         names.add(playerName);
         purses[names.size()] = 0;
+    }
+
+    void putPlayerInPenaltyBox(Game game) {
+        game.inPenaltyBox[game.currentPlayer] = true;
+    }
+
+    boolean isInPenaltyBox(Game game) {
+        return game.inPenaltyBox[game.currentPlayer];
+    }
+
+    void initPenaltyBox(Game game) {
+        inPenaltyBox[game.playerNames.size()] = false;
     }
 }

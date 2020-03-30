@@ -96,7 +96,7 @@ public class Players {
         return names.size();
     }
 
-    void printToto(String format, Consumer<String> consumer, int currentPlayer) {
+    void print(Consumer<String> consumer, String format, int currentPlayer) {
         String currentString = currentPlayerName(currentPlayer);
         String x = String.format(format, currentString);
         consumer.accept(x);

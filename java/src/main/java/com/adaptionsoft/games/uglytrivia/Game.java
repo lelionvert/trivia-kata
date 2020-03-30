@@ -96,7 +96,7 @@ public class Game {
         Consumer<String> consumer = System.out::println;
         int currentPlayer = this.currentPlayer;
 
-        players.printToto(format, consumer, currentPlayer);
+        players.print(consumer, format, currentPlayer);
     }
 
     private void askQuestion() {

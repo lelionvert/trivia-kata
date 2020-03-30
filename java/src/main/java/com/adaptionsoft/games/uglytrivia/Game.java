@@ -26,9 +26,9 @@ public class Game {
         players = new Players(playerNames, places);
     }
 
-    String currentCategory(int currentPlayer, int[] places) {
+    String currentCategory(int currentPlayer) {
 
-        switch (places[currentPlayer] % 4) {
+        switch (players.getIndexCategory(currentPlayer, 4)) {
             case 0:
                 return "Pop";
             case 1:
@@ -51,7 +51,7 @@ public class Game {
     public boolean add(String playerName) {
 
         players.add(playerName);
-        places[playerNames.size()] = 0;
+        players.addPlaces();
         players.initPenaltyBox();
 
         System.out.println(playerName + " was added");
@@ -69,12 +69,12 @@ public class Game {
                 isGettingOutOfPenaltyBox = true;
                 System.out.println(playerNames.get(currentPlayer) + " is getting out of the penalty box");
 
-                int playerNewPlace = players.getPlayerNewPlace(roll, this);
+                int playerNewPlace = players.getPlayerNewPlace(roll, this.currentPlayer);
 
                 System.out.println(playerNames.get(currentPlayer)
                         + "'s new location is "
                         + playerNewPlace);
-                System.out.println("The category is " + currentCategory(currentPlayer, places));
+                System.out.println("The category is " + currentCategory(currentPlayer));
                 askQuestion();
             } else {
                 System.out.println(playerNames.get(currentPlayer) + " is not getting out of the penalty box");
@@ -83,25 +83,25 @@ public class Game {
 
         } else {
 
-            int playerNewPlace = players.getPlayerNewPlace(roll, this);
+            int playerNewPlace = players.getPlayerNewPlace(roll, this.currentPlayer);
 
             System.out.println(playerNames.get(currentPlayer)
                     + "'s new location is "
                     + playerNewPlace);
-            System.out.println("The category is " + currentCategory(currentPlayer, places));
+            System.out.println("The category is " + currentCategory(currentPlayer));
             askQuestion();
         }
 
     }
 
     private void askQuestion() {
-        if (currentCategory(currentPlayer, places).equals("Pop"))
+        if (currentCategory(currentPlayer).equals("Pop"))
             System.out.println(popQuestions.removeFirst());
-        if (currentCategory(currentPlayer, places).equals("Science"))
+        if (currentCategory(currentPlayer).equals("Science"))
             System.out.println(scienceQuestions.removeFirst());
-        if (currentCategory(currentPlayer, places).equals("Sports"))
+        if (currentCategory(currentPlayer).equals("Sports"))
             System.out.println(sportsQuestions.removeFirst());
-        if (currentCategory(currentPlayer, places).equals("Rock"))
+        if (currentCategory(currentPlayer).equals("Rock"))
             System.out.println(rockQuestions.removeFirst());
     }
 

@@ -71,9 +71,9 @@ public class Players {
         inPenaltyBox[names.size()] = false;
     }
 
-    int getPlayerNewPlace(int roll, Game game) {
-        int playerNewPlace = calculateNewPlace(roll, places[game.currentPlayer]);
-        places[game.currentPlayer] = playerNewPlace;
+    int getPlayerNewPlace(int roll, int currentPlayer) {
+        int playerNewPlace = calculateNewPlace(roll, places[currentPlayer]);
+        places[currentPlayer] = playerNewPlace;
         return playerNewPlace;
     }
 
@@ -83,5 +83,14 @@ public class Players {
             playerNewPlace = playerNewPlace - 12;
         }
         return playerNewPlace;
+    }
+
+    int getIndexCategory(int currentPlayer, int categoriesCount) {
+
+        return this.places[currentPlayer] % categoriesCount;
+    }
+
+    void addPlaces() {
+        places[names.size()] = 0;
     }
 }

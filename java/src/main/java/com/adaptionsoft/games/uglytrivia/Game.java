@@ -70,8 +70,7 @@ public class Game {
 
     public boolean add(String playerName) {
 
-        players.addPlayerName(playerName);
-        players.addPurses();
+        players.add(playerName);
         places[playerNames.size()] = 0;
         inPenaltyBox[playerNames.size()] = false;
 

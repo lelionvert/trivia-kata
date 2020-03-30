@@ -49,11 +49,8 @@ public class Players {
         this.purses[currentPlayer]++;
     }
 
-    void addPlayerName(String playerName) {
+    void add(String playerName) {
         names.add(playerName);
-    }
-
-    void addPurses() {
         purses[names.size()] = 0;
     }
 }

@@ -16,55 +16,43 @@ public class Players {
         this.playerQueue = new LinkedList<>();
     }
 
-    boolean didPlayerWin(int currentPlayer) {
+    boolean didPlayerWin(Player player) {
 
-        int playerPurses = playerList.get(currentPlayer).purses();
-        return !(playerPurses == 6);
+        return !(player.purses() == 6);
     }
 
-    boolean isDidPlayerWin(int currentPlayer) {
-        Player player = playerList.get(currentPlayer);
-        if (playerList.get(currentPlayer).inPenaltyBox()) {
+    boolean isDidPlayerWin(Player player) {
+        if (player.inPenaltyBox()) {
 
-            if (playerList.get(currentPlayer).isGettingOutOfPenaltyBox()) {
+            if (player.isGettingOutOfPenaltyBox()) {
                 System.out.println("Answer was correct!!!!");
-                playerList.get(currentPlayer).earnCoin();
+                player.earnCoin();
                 System.out.println(player + " now has " + player.purses() + " Gold Coins.");
 
-                return this.didPlayerWin(currentPlayer);
+                return this.didPlayerWin(player);
             } else {
                 return true;
             }
         } else {
             System.out.println("Answer was correct!!!!");
-            playerList.get(currentPlayer).earnCoin();
+            player.earnCoin();
             System.out.println(player + " now has " + player.purses() + " Gold Coins.");
 
-            return this.didPlayerWin(currentPlayer);
+            return this.didPlayerWin(player);
         }
     }
 
-    void putPlayerInPenaltyBox(int currentPlayer) {
-        playerList.get(currentPlayer).setPenaltyBox(true);
+    void putPlayerInPenaltyBox(Player player) {
+        player.setPenaltyBox(true);
     }
 
-    boolean isInPenaltyBox(int currentPlayer) {
-        return playerList.get(currentPlayer).inPenaltyBox();
+    int getPlayerNewPlace(int roll, Player player) {
+        return player.updatePlace(roll);
     }
 
-    int getPlayerNewPlace(int roll, int currentPlayer) {
-        return updatePlace(currentPlayer, roll);
-    }
+    int getIndexCategory(int categoriesCount, Player player) {
 
-    private int updatePlace(int currentPlayer, int roll) {
-
-        return playerList.get(currentPlayer).updatePlace(roll);
-    }
-
-    int getIndexCategory(int currentPlayer, int categoriesCount) {
-        int place = playerList.get(currentPlayer).place();
-
-        return place % categoriesCount;
+        return player.place() % categoriesCount;
     }
 
     public void add(String playerName) {
@@ -73,21 +61,16 @@ public class Players {
 
     }
 
-    Player currentPlayerName(int currentPlayer) {
-        return playerList.get(currentPlayer);
-    }
-
     int countPlayers() {
         return playerList.size();
     }
 
-    void print(Consumer<String> consumer, String format, int currentPlayer) {
-        Player currentString = currentPlayerName(currentPlayer);
-        consumer.accept(String.format(format, currentString));
+    void print(Consumer<String> consumer, String format, Player playerName) {
+        consumer.accept(String.format(format, playerName));
     }
 
-    void gettingOutOfPenaltyBox(int currentPlayer, boolean statePlayerInPenaltyBox) {
-        playerList.get(currentPlayer).gettingOutOfPenaltyBox(statePlayerInPenaltyBox);
+    void gettingOutOfPenaltyBox(boolean statePlayerInPenaltyBox, Player player) {
+        player.gettingOutOfPenaltyBox(statePlayerInPenaltyBox);
     }
 
     public void addInQueue(String player) {

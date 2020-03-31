@@ -24,9 +24,9 @@ public class Game {
 
     }
 
-    String currentCategory(int currentPlayer) {
+    String currentCategory(Player player) {
 
-        switch (players.getIndexCategory(currentPlayer, 4)) {
+        switch (players.getIndexCategory(4, player)) {
             case 0:
                 return "Pop";
             case 1:
@@ -60,52 +60,58 @@ public class Game {
         printCommand("%s is the current player");
         System.out.println("They have rolled a " + roll);
 
-        if (players.isInPenaltyBox(this.currentPlayer)) {
+        Player player = players.playerList.get(this.currentPlayer);
+        if (player.inPenaltyBox()) {
             if (roll % 2 != 0) {
 
-                players.gettingOutOfPenaltyBox(currentPlayer,true);
+                players.gettingOutOfPenaltyBox(true, player);
                 printCommand("%s is getting out of the penalty box");
 
-                int playerNewPlace = players.getPlayerNewPlace(roll, this.currentPlayer);
+                int playerNewPlace = players.getPlayerNewPlace(roll, player);
 
                 printCommand("%s's new location is " + playerNewPlace);
-                System.out.println("The category is " + currentCategory(currentPlayer));
+                System.out.println("The category is " + currentCategory(players.playerList.get(currentPlayer)));
                 askQuestion();
             } else {
                 printCommand("%s is not getting out of the penalty box");
-                players.gettingOutOfPenaltyBox(currentPlayer, false);
+                players.gettingOutOfPenaltyBox(false, player);
             }
 
         } else {
 
-            int playerNewPlace = players.getPlayerNewPlace(roll, this.currentPlayer);
+            int playerNewPlace = players.getPlayerNewPlace(roll, player);
 
             printCommand("%s's new location is " + playerNewPlace);
-            System.out.println("The category is " + currentCategory(currentPlayer));
+            System.out.println("The category is " + currentCategory(players.playerList.get(currentPlayer)));
             askQuestion();
         }
 
     }
 
     private void printCommand(String format) {
-        players.print(System.out::println, format, this.currentPlayer);
+        Player playerName = players.playerList.get(this.currentPlayer);
+        players.print(System.out::println, format, playerName);
     }
 
     private void askQuestion() {
-        if (currentCategory(currentPlayer).equals("Pop"))
+        Player player = players.playerList.get(currentPlayer);
+
+        if (currentCategory(player).equals("Pop"))
             System.out.println(popQuestions.removeFirst());
-        if (currentCategory(currentPlayer).equals("Science"))
+        if (currentCategory(player).equals("Science"))
             System.out.println(scienceQuestions.removeFirst());
-        if (currentCategory(currentPlayer).equals("Sports"))
+        if (currentCategory(player).equals("Sports"))
             System.out.println(sportsQuestions.removeFirst());
-        if (currentCategory(currentPlayer).equals("Rock"))
+        if (currentCategory(player).equals("Rock"))
             System.out.println(rockQuestions.removeFirst());
     }
 
 
     public boolean wasCorrectlyAnswered() {
         boolean didPlayerWin;
-        didPlayerWin = players.isDidPlayerWin(currentPlayer);
+        Player player = players.playerList.get(currentPlayer);
+
+        didPlayerWin = players.isDidPlayerWin(player);
         getNextPlayer();
         return didPlayerWin;
     }
@@ -114,7 +120,8 @@ public class Game {
         System.out.println("Question was incorrectly answered");
 
         printCommand("%s was sent to the penalty box");
-        players.putPlayerInPenaltyBox(this.currentPlayer);
+        Player player = players.playerList.get(this.currentPlayer);
+        players.putPlayerInPenaltyBox(player);
 
         getNextPlayer();
 

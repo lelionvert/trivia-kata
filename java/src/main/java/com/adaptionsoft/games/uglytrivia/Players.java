@@ -6,13 +6,9 @@ import java.util.function.Consumer;
 public class Players {
 
     private ArrayList<Player> playerList;
-    private int[] places;
-    private boolean[] inPenaltyBox;
 
 
     public Players() {
-        this.places = new int[6];
-        this.inPenaltyBox = new boolean[6];
         this.playerList = new ArrayList<>();
     }
 
@@ -24,7 +20,7 @@ public class Players {
 
     boolean isDidPlayerWin(int currentPlayer) {
         Player player = playerList.get(currentPlayer);
-        if (inPenaltyBox[currentPlayer]) {
+        if (playerList.get(currentPlayer).inPenaltyBox()) {
 
             if (playerList.get(currentPlayer).isGettingOutOfPenaltyBox()) {
                 System.out.println("Answer was correct!!!!");
@@ -32,7 +28,7 @@ public class Players {
                 System.out.println(player + " now has " + player.purses() + " Gold Coins.");
 
                 return this.didPlayerWin(currentPlayer);
-            }else {
+            } else {
                 return true;
             }
         } else {
@@ -45,11 +41,11 @@ public class Players {
     }
 
     void putPlayerInPenaltyBox(int currentPlayer) {
-        inPenaltyBox[currentPlayer] = true;
+        playerList.get(currentPlayer).setPenaltyBox(true);
     }
 
     boolean isInPenaltyBox(int currentPlayer) {
-        return inPenaltyBox[currentPlayer];
+        return playerList.get(currentPlayer).inPenaltyBox();
     }
 
     int getPlayerNewPlace(int roll, int currentPlayer) {
@@ -68,11 +64,7 @@ public class Players {
     }
 
     void add(String playerName) {
-        boolean initPenaltyPlayer = false;
         playerList.add(new Player(playerName));
-        places[countPlayers()] = 0;
-        inPenaltyBox[countPlayers()] = initPenaltyPlayer;
-
     }
 
     Player currentPlayerName(int currentPlayer) {

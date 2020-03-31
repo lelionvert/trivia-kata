@@ -54,4 +54,12 @@ public class Player {
     public boolean isGettingOutOfPenaltyBox() {
         return isGettingOutOfPenaltyBox;
     }
+
+    public boolean inPenaltyBox() {
+        return inPenaltyBox;
+    }
+
+    public void setPenaltyBox(boolean penaltyState) {
+        inPenaltyBox = penaltyState;
+    }
 }

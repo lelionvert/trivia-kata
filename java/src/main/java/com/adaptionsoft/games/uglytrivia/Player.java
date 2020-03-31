@@ -7,6 +7,14 @@ public class Player {
     private int place;
     private boolean inPenaltyBox;
 
+    static int calculateNewPlace(int roll, int currentPlace) {
+        int playerNewPlace = currentPlace + roll;
+        if (playerNewPlace > 11) {
+            playerNewPlace = playerNewPlace - 12;
+        }
+        return playerNewPlace;
+    }
+
     @Override
     public String toString() {
         return playerName;
@@ -32,7 +40,8 @@ public class Player {
         return place;
     }
 
-    public void updatePlace(int newPlace) {
-        place = newPlace;
+    public void updatePlace(int newPlace, int roll) {
+        int playerNewPlace = calculateNewPlace(roll, place);
+        place = playerNewPlace;
     }
 }

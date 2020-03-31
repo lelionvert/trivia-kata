@@ -15,7 +15,7 @@ public class Players {
         this.places = new int[6];
         this.inPenaltyBox = new boolean[6];
         this.purses = new int[6];
-        this.playerList = new ArrayList<Player>();
+        this.playerList = new ArrayList<>();
     }
 
     boolean didPlayerWin(int currentPlayer) {
@@ -25,26 +25,23 @@ public class Players {
 
     boolean isDidPlayerWin(int currentPlayer, boolean isGettingOutOfPenaltyBox, boolean inPenaltyBox) {
         boolean didPlayerWin;
+        Player playerName = playerList.get(currentPlayer);
         if (inPenaltyBox) {
             didPlayerWin = true;
 
             if (isGettingOutOfPenaltyBox) {
                 System.out.println("Answer was correct!!!!");
                 earnCoin(currentPlayer);
-                System.out.println(playerList.get(currentPlayer)
-                        + " now has "
-                        + this.purses[currentPlayer]
-                        + " Gold Coins.");
+                int playerPurse = this.purses[currentPlayer];
+                System.out.println(playerName + " now has " + playerPurse + " Gold Coins.");
 
                 didPlayerWin = this.didPlayerWin(currentPlayer);
             }
         } else {
             System.out.println("Answer was corrent!!!!");
             earnCoin(currentPlayer);
-            System.out.println(playerList.get(currentPlayer)
-                    + " now has "
-                    + this.purses[currentPlayer]
-                    + " Gold Coins.");
+            int playerPurse = this.purses[currentPlayer];
+            System.out.println(playerName + " now has " + playerPurse + " Gold Coins.");
 
             didPlayerWin = this.didPlayerWin(currentPlayer);
         }
@@ -82,10 +79,13 @@ public class Players {
     }
 
     void add(String playerName) {
-        playerList.add(new Player(playerName));
-        purses[playerList.size()] = 0;
-        places[playerList.size()] = 0;
-        inPenaltyBox[playerList.size()] = false;
+        int initPursePlayer = 0;
+        int initPlacePlayer = 0;
+        boolean initPenaltyPlayer = false;
+        playerList.add(new Player(playerName,initPursePlayer,initPlacePlayer,inPenaltyBox));
+        purses[countPlayers()] = initPursePlayer;
+        places[countPlayers()] = initPlacePlayer;
+        inPenaltyBox[countPlayers()] = initPenaltyPlayer;
 
     }
 
@@ -99,7 +99,6 @@ public class Players {
 
     void print(Consumer<String> consumer, String format, int currentPlayer) {
         Player currentString = currentPlayerName(currentPlayer);
-        String x = String.format(format, currentString);
-        consumer.accept(x);
+        consumer.accept(String.format(format, currentString));
     }
 }

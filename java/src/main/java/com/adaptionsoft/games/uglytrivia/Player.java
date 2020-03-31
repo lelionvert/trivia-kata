@@ -9,7 +9,7 @@ public class Player {
         return playerName;
     }
 
-    public Player(String playerName) {
+    public Player(String playerName, int initPursePlayer, int initPlacePlayer, boolean[] inPenaltyBox) {
 
         this.playerName = playerName;
     }

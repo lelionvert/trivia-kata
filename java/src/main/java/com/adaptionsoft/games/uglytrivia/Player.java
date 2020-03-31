@@ -27,4 +27,12 @@ public class Player {
     public void earnCoin() {
         purses++;
     }
+
+    public int place() {
+        return place;
+    }
+
+    public void updatePlace(int newPlace) {
+        place = newPlace;
+    }
 }

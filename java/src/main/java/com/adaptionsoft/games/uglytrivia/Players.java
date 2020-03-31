@@ -54,9 +54,20 @@ public class Players {
     }
 
     int getPlayerNewPlace(int roll, int currentPlayer) {
-        int playerNewPlace = calculateNewPlace(roll, places[currentPlayer]);
-        places[currentPlayer] = playerNewPlace;
+        int oldPlace = getPlace(currentPlayer);
+        int playerNewPlace = calculateNewPlace(roll, oldPlace);
+
+        updatePlace(currentPlayer, playerNewPlace);
+
         return playerNewPlace;
+    }
+
+    private int getPlace(int currentPlayer) {
+        return playerList.get(currentPlayer).place();
+    }
+
+    private void updatePlace(int currentPlayer, int playerNewPlace) {
+        playerList.get(currentPlayer).updatePlace(playerNewPlace);
     }
 
     int calculateNewPlace(int roll, int currentPlace) {
@@ -68,14 +79,15 @@ public class Players {
     }
 
     int getIndexCategory(int currentPlayer, int categoriesCount) {
-        return this.places[currentPlayer] % categoriesCount;
+        int place = getPlace(currentPlayer);
+
+        return place % categoriesCount;
     }
 
     void add(String playerName) {
-        int initPlacePlayer = 0;
         boolean initPenaltyPlayer = false;
         playerList.add(new Player(playerName));
-        places[countPlayers()] = initPlacePlayer;
+        places[countPlayers()] = 0;
         inPenaltyBox[countPlayers()] = initPenaltyPlayer;
 
     }

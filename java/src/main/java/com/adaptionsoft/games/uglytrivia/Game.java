@@ -11,6 +11,7 @@ public class Game {
     LinkedList<String> rockQuestions = new LinkedList<>();
 
     int currentPlayer = 0;
+    private Player presentPlayer;
 
     public Game() {
         for (int i = 0; i < 50; i++) {
@@ -20,6 +21,7 @@ public class Game {
             rockQuestions.addLast(createRockQuestion(i));
         }
         players = new Players();
+
     }
 
     String currentCategory(int currentPlayer) {
@@ -54,6 +56,7 @@ public class Game {
     }
 
     public void roll(int roll) {
+
         printCommand("%s is the current player");
         System.out.println("They have rolled a " + roll);
 
@@ -121,6 +124,7 @@ public class Game {
     private void getNextPlayer() {
         currentPlayer++;
         if (currentPlayer == players.countPlayers()) currentPlayer = 0;
+        presentPlayer = players.fetchNextPlayer();
     }
 
 }

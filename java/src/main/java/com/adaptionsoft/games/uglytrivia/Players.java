@@ -1,15 +1,19 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.function.Consumer;
 
 public class Players {
 
-    private ArrayList<Player> playerList;
+    public ArrayList<Player> playerList;
+    private Queue<Player> playerQueue;
 
 
     public Players() {
         this.playerList = new ArrayList<>();
+        this.playerQueue = new LinkedList<>();
     }
 
     boolean didPlayerWin(int currentPlayer) {
@@ -63,8 +67,10 @@ public class Players {
         return place % categoriesCount;
     }
 
-    void add(String playerName) {
+    public void add(String playerName) {
         playerList.add(new Player(playerName));
+        playerQueue.add(new Player(playerName));
+
     }
 
     Player currentPlayerName(int currentPlayer) {
@@ -82,5 +88,15 @@ public class Players {
 
     void gettingOutOfPenaltyBox(int currentPlayer, boolean statePlayerInPenaltyBox) {
         playerList.get(currentPlayer).gettingOutOfPenaltyBox(statePlayerInPenaltyBox);
+    }
+
+    public void addInQueue(String player) {
+        playerQueue.add(new Player(player));
+    }
+
+    public Player fetchNextPlayer() {
+        Player currentPlayer = playerQueue.poll();
+        playerQueue.add(currentPlayer);
+        return currentPlayer;
     }
 }

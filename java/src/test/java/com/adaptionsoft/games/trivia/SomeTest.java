@@ -126,35 +126,35 @@ public class SomeTest {
 				"Chet's new location is 1\r\n" +
 				"The category is Science\r\n" +
 				"Science Question 0\r\n" +
-				"Answer was corrent!!!!\r\n" +
+				"Answer was correct!!!!\r\n" +
 				"Chet now has 1 Gold Coins.\r\n" +
 				"Pat is the current player\r\n" +
 				"They have rolled a 3\r\n" +
 				"Pat's new location is 3\r\n" +
 				"The category is Rock\r\n" +
 				"Rock Question 0\r\n" +
-				"Answer was corrent!!!!\r\n" +
+				"Answer was correct!!!!\r\n" +
 				"Pat now has 1 Gold Coins.\r\n" +
 				"Sue is the current player\r\n" +
 				"They have rolled a 5\r\n" +
 				"Sue's new location is 5\r\n" +
 				"The category is Science\r\n" +
 				"Science Question 1\r\n" +
-				"Answer was corrent!!!!\r\n" +
+				"Answer was correct!!!!\r\n" +
 				"Sue now has 1 Gold Coins.\r\n" +
 				"Chet is the current player\r\n" +
 				"They have rolled a 5\r\n" +
 				"Chet's new location is 6\r\n" +
 				"The category is Sports\r\n" +
 				"Sports Question 0\r\n" +
-				"Answer was corrent!!!!\r\n" +
+				"Answer was correct!!!!\r\n" +
 				"Chet now has 2 Gold Coins.\r\n" +
 				"Pat is the current player\r\n" +
 				"They have rolled a 4\r\n" +
 				"Pat's new location is 7\r\n" +
 				"The category is Rock\r\n" +
 				"Rock Question 1\r\n" +
-				"Answer was corrent!!!!\r\n" +
+				"Answer was correct!!!!\r\n" +
 				"Pat now has 2 Gold Coins.\r\n" +
 				"Sue is the current player\r\n" +
 				"They have rolled a 5\r\n" +
@@ -168,7 +168,7 @@ public class SomeTest {
 				"Chet's new location is 9\r\n" +
 				"The category is Science\r\n" +
 				"Science Question 2\r\n" +
-				"Answer was corrent!!!!\r\n" +
+				"Answer was correct!!!!\r\n" +
 				"Chet now has 3 Gold Coins.\r\n" +
 				"Pat is the current player\r\n" +
 				"They have rolled a 3\r\n" +
@@ -190,7 +190,7 @@ public class SomeTest {
 				"Chet's new location is 11\r\n" +
 				"The category is Rock\r\n" +
 				"Rock Question 2\r\n" +
-				"Answer was corrent!!!!\r\n" +
+				"Answer was correct!!!!\r\n" +
 				"Chet now has 4 Gold Coins.\r\n" +
 				"Pat is the current player\r\n" +
 				"They have rolled a 2\r\n" +
@@ -208,7 +208,7 @@ public class SomeTest {
 				"Chet's new location is 4\r\n" +
 				"The category is Pop\r\n" +
 				"Pop Question 0\r\n" +
-				"Answer was corrent!!!!\r\n" +
+				"Answer was correct!!!!\r\n" +
 				"Chet now has 5 Gold Coins.\r\n" +
 				"Pat is the current player\r\n" +
 				"They have rolled a 4\r\n" +
@@ -226,7 +226,7 @@ public class SomeTest {
 				"Chet's new location is 5\r\n" +
 				"The category is Science\r\n" +
 				"Science Question 5\r\n" +
-				"Answer was corrent!!!!\r\n" +
+				"Answer was correct!!!!\r\n" +
 				"Chet now has 6 Gold Coins.\r\n";
 
 		main(1L);

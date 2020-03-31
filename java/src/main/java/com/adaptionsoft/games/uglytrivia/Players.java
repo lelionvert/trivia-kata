@@ -22,27 +22,26 @@ public class Players {
         return !(playerPurses == 6);
     }
 
-    boolean isDidPlayerWin(int currentPlayer, boolean isGettingOutOfPenaltyBox, boolean inPenaltyBox) {
-        boolean didPlayerWin;
+    boolean isDidPlayerWin(int currentPlayer, boolean isGettingOutOfPenaltyBox) {
         Player player = playerList.get(currentPlayer);
-        if (inPenaltyBox) {
-            didPlayerWin = true;
+        if (inPenaltyBox[currentPlayer]) {
 
             if (isGettingOutOfPenaltyBox) {
                 System.out.println("Answer was correct!!!!");
                 playerList.get(currentPlayer).earnCoin();
                 System.out.println(player + " now has " + player.purses() + " Gold Coins.");
 
-                didPlayerWin = this.didPlayerWin(currentPlayer);
+                return this.didPlayerWin(currentPlayer);
+            }else {
+                return true;
             }
         } else {
-            System.out.println("Answer was corrent!!!!");
+            System.out.println("Answer was correct!!!!");
             playerList.get(currentPlayer).earnCoin();
             System.out.println(player + " now has " + player.purses() + " Gold Coins.");
 
-            didPlayerWin = this.didPlayerWin(currentPlayer);
+            return this.didPlayerWin(currentPlayer);
         }
-        return didPlayerWin;
     }
 
     void putPlayerInPenaltyBox(int currentPlayer) {

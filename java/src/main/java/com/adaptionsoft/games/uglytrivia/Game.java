@@ -103,7 +103,7 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         boolean didPlayerWin;
-        didPlayerWin = players.isDidPlayerWin(currentPlayer, isGettingOutOfPenaltyBox, players.isInPenaltyBox(this.currentPlayer));
+        didPlayerWin = players.isDidPlayerWin(currentPlayer, isGettingOutOfPenaltyBox);
         getNextPlayer();
         return didPlayerWin;
     }

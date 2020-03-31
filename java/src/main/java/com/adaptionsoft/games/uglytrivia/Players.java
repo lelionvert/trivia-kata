@@ -5,17 +5,17 @@ import java.util.function.Consumer;
 
 public class Players {
 
-    private ArrayList<String> names;
+    private ArrayList<Player> playerList;
     private int[] places;
     private int[] purses;
     private boolean[] inPenaltyBox;
 
 
     public Players() {
-        this.names = new ArrayList<>();
         this.places = new int[6];
         this.inPenaltyBox = new boolean[6];
         this.purses = new int[6];
+        this.playerList = new ArrayList<Player>();
     }
 
     boolean didPlayerWin(int currentPlayer) {
@@ -31,7 +31,7 @@ public class Players {
             if (isGettingOutOfPenaltyBox) {
                 System.out.println("Answer was correct!!!!");
                 earnCoin(currentPlayer);
-                System.out.println(names.get(currentPlayer)
+                System.out.println(playerList.get(currentPlayer)
                         + " now has "
                         + this.purses[currentPlayer]
                         + " Gold Coins.");
@@ -41,7 +41,7 @@ public class Players {
         } else {
             System.out.println("Answer was corrent!!!!");
             earnCoin(currentPlayer);
-            System.out.println(names.get(currentPlayer)
+            System.out.println(playerList.get(currentPlayer)
                     + " now has "
                     + this.purses[currentPlayer]
                     + " Gold Coins.");
@@ -82,22 +82,23 @@ public class Players {
     }
 
     void add(String playerName) {
-        names.add(playerName);
-        purses[names.size()] = 0;
-        places[names.size()] = 0;
-        inPenaltyBox[names.size()] = false;
+        playerList.add(new Player(playerName));
+        purses[playerList.size()] = 0;
+        places[playerList.size()] = 0;
+        inPenaltyBox[playerList.size()] = false;
+
     }
 
-    String currentPlayerName(int currentPlayer) {
-        return names.get(currentPlayer);
+    Player currentPlayerName(int currentPlayer) {
+        return playerList.get(currentPlayer);
     }
 
     int countPlayers() {
-        return names.size();
+        return playerList.size();
     }
 
     void print(Consumer<String> consumer, String format, int currentPlayer) {
-        String currentString = currentPlayerName(currentPlayer);
+        Player currentString = currentPlayerName(currentPlayer);
         String x = String.format(format, currentString);
         consumer.accept(x);
     }

@@ -40,8 +40,8 @@ public class Player {
         return place;
     }
 
-    public void updatePlace(int newPlace, int roll) {
-        int playerNewPlace = calculateNewPlace(roll, place);
-        place = playerNewPlace;
+    public int updatePlace(int roll) {
+        place = calculateNewPlace(roll, place);
+        return place;
     }
 }

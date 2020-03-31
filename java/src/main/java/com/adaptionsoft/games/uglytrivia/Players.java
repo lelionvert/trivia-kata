@@ -54,22 +54,12 @@ public class Players {
     }
 
     int getPlayerNewPlace(int roll, int currentPlayer) {
-        int oldPlace = playerList.get(currentPlayer).place();
-
-        int playerNewPlace1 = oldPlace + roll;
-        if (playerNewPlace1 > 11) {
-            playerNewPlace1 = playerNewPlace1 - 12;
-        }
-        int playerNewPlace = playerNewPlace1;
-
-        updatePlace(currentPlayer, playerNewPlace, roll);
-
-        return playerNewPlace;
+        return updatePlace(currentPlayer, roll);
     }
 
-    private void updatePlace(int currentPlayer, int playerNewPlace, int roll) {
+    private int updatePlace(int currentPlayer, int roll) {
 
-        playerList.get(currentPlayer).updatePlace(playerNewPlace, roll);
+        return playerList.get(currentPlayer).updatePlace(roll);
     }
 
     int getIndexCategory(int currentPlayer, int categoriesCount) {

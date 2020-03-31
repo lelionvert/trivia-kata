@@ -1,7 +1,6 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.LinkedList;
-import java.util.function.Consumer;
 
 public class Game {
     final Players players;
@@ -63,8 +62,7 @@ public class Game {
             if (roll % 2 != 0) {
 
                 isGettingOutOfPenaltyBox = true;
-                String format = "%s is getting out of the penalty box";
-                printCommand(format);
+                printCommand("%s is getting out of the penalty box");
 
                 int playerNewPlace = players.getPlayerNewPlace(roll, this.currentPlayer);
 
@@ -72,7 +70,7 @@ public class Game {
                 System.out.println("The category is " + currentCategory(currentPlayer));
                 askQuestion();
             } else {
-                System.out.println(players.currentPlayerName(currentPlayer) + " is not getting out of the penalty box");
+                printCommand("%s is not getting out of the penalty box");
                 isGettingOutOfPenaltyBox = false;
             }
 
@@ -80,9 +78,7 @@ public class Game {
 
             int playerNewPlace = players.getPlayerNewPlace(roll, this.currentPlayer);
 
-            System.out.println(players.currentPlayerName(currentPlayer)
-                    + "'s new location is "
-                    + playerNewPlace);
+            printCommand("%s's new location is " + playerNewPlace);
             System.out.println("The category is " + currentCategory(currentPlayer));
             askQuestion();
         }
@@ -90,11 +86,7 @@ public class Game {
     }
 
     private void printCommand(String format) {
-
-        Consumer<String> consumer = System.out::println;
-        int currentPlayer = this.currentPlayer;
-
-        players.print(consumer, format, currentPlayer);
+        players.print(System.out::println, format, this.currentPlayer);
     }
 
     private void askQuestion() {
@@ -119,7 +111,7 @@ public class Game {
     public boolean wrongAnswer() {
         System.out.println("Question was incorrectly answered");
 
-        System.out.println(players.currentPlayerName(currentPlayer) + " was sent to the penalty box");
+        printCommand("%s was sent to the penalty box");
         players.putPlayerInPenaltyBox(this.currentPlayer);
 
         getNextPlayer();

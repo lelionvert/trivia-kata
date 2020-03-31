@@ -22,11 +22,11 @@ public class Players {
         return !(playerPurses == 6);
     }
 
-    boolean isDidPlayerWin(int currentPlayer, boolean isGettingOutOfPenaltyBox) {
+    boolean isDidPlayerWin(int currentPlayer) {
         Player player = playerList.get(currentPlayer);
         if (inPenaltyBox[currentPlayer]) {
 
-            if (isGettingOutOfPenaltyBox) {
+            if (playerList.get(currentPlayer).isGettingOutOfPenaltyBox()) {
                 System.out.println("Answer was correct!!!!");
                 playerList.get(currentPlayer).earnCoin();
                 System.out.println(player + " now has " + player.purses() + " Gold Coins.");
@@ -86,5 +86,9 @@ public class Players {
     void print(Consumer<String> consumer, String format, int currentPlayer) {
         Player currentString = currentPlayerName(currentPlayer);
         consumer.accept(String.format(format, currentString));
+    }
+
+    void gettingOutOfPenaltyBox(int currentPlayer, boolean statePlayerInPenaltyBox) {
+        playerList.get(currentPlayer).gettingOutOfPenaltyBox(statePlayerInPenaltyBox);
     }
 }

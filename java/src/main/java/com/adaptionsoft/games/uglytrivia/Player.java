@@ -3,6 +3,7 @@ package com.adaptionsoft.games.uglytrivia;
 public class Player {
 
     private String playerName;
+    private boolean isGettingOutOfPenaltyBox;
     private int purses;
     private int place;
     private boolean inPenaltyBox;
@@ -23,6 +24,7 @@ public class Player {
     public Player(String playerName) {
 
         this.playerName = playerName;
+        this.isGettingOutOfPenaltyBox = false;
         this.purses = 0;
         this.place = 0;
         this.inPenaltyBox = false;
@@ -43,5 +45,13 @@ public class Player {
     public int updatePlace(int roll) {
         place = calculateNewPlace(roll, place);
         return place;
+    }
+
+    public void gettingOutOfPenaltyBox(boolean statePlayerInPenaltyBox) {
+        isGettingOutOfPenaltyBox = statePlayerInPenaltyBox;
+    }
+
+    public boolean isGettingOutOfPenaltyBox() {
+        return isGettingOutOfPenaltyBox;
     }
 }

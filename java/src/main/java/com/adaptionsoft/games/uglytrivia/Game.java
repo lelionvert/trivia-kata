@@ -8,11 +8,6 @@ import java.util.Map;
 public class Game {
     final Board board;
 
-    LinkedList<String> popQuestions = new LinkedList<>();
-    LinkedList<String> scienceQuestions = new LinkedList<>();
-    LinkedList<String> sportsQuestions = new LinkedList<>();
-    LinkedList<String> rockQuestions = new LinkedList<>();
-
     private Player player = null;
     private Map<Category, LinkedList<String>> questionsByCategory = new HashMap<>();
 
@@ -20,21 +15,21 @@ public class Game {
 
         initializeQuestionCategories();
 
+        fillQuestionCategories();
+
+        board = new Board();
+
+    }
+
+    private void fillQuestionCategories() {
         for (int i = 0; i < 50; i++) {
             String questionIndex = " Question " + i;
-            popQuestions.addLast(Category.POP.getValue() + questionIndex);
-            scienceQuestions.addLast(Category.SCIENCE.getValue() + " Question " + i);
-            sportsQuestions.addLast(Category.SPORTS.getValue() + " Question " + i);
-            rockQuestions.addLast(Category.ROCK.getValue() + " Question " + i);
-
             Arrays.stream(Category.values())
                     .forEach(category -> questionsByCategory
                             .get(category)
                             .add(category.getValue() + questionIndex));
 
         }
-        board = new Board();
-
     }
 
     private void initializeQuestionCategories() {
@@ -109,12 +104,8 @@ public class Game {
     }
 
     private void askQuestion() {
-
         Category category = currentCategory(player);
-
-        String question = questionsByCategory.get(category).remove();
-        System.out.println(question);
-
+        System.out.println(questionsByCategory.get(category).remove());
     }
 
 

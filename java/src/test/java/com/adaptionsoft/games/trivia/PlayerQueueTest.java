@@ -4,6 +4,9 @@ import com.adaptionsoft.games.uglytrivia.Player;
 import com.adaptionsoft.games.uglytrivia.Players;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerQueueTest {
@@ -19,6 +22,7 @@ public class PlayerQueueTest {
         Player currentPlayer = players.fetchNextPlayer();
         Player expectedPlayer = new Player("Player1");
         assertThat(currentPlayer).isEqualTo(expectedPlayer);
+
 
         currentPlayer = players.fetchNextPlayer();
         expectedPlayer = new Player("Player2");

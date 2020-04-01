@@ -10,8 +10,7 @@ public class Game {
     LinkedList<String> sportsQuestions = new LinkedList<>();
     LinkedList<String> rockQuestions = new LinkedList<>();
 
-    int currentPlayer = 0;
-    private Player presentPlayer;
+    private Player player = null;
 
     public Game() {
         for (int i = 0; i < 50; i++) {
@@ -57,10 +56,11 @@ public class Game {
 
     public void roll(int roll) {
 
+        if (player == null) getNextPlayer();
+
         printCommand("%s is the current player");
         System.out.println("They have rolled a " + roll);
 
-        Player player = players.playerList.get(this.currentPlayer);
         if (player.inPenaltyBox()) {
             if (roll % 2 != 0) {
 
@@ -70,7 +70,7 @@ public class Game {
                 int playerNewPlace = players.getPlayerNewPlace(roll, player);
 
                 printCommand("%s's new location is " + playerNewPlace);
-                System.out.println("The category is " + currentCategory(players.playerList.get(currentPlayer)));
+                System.out.println("The category is " + currentCategory(player));
                 askQuestion();
             } else {
                 printCommand("%s is not getting out of the penalty box");
@@ -82,19 +82,17 @@ public class Game {
             int playerNewPlace = players.getPlayerNewPlace(roll, player);
 
             printCommand("%s's new location is " + playerNewPlace);
-            System.out.println("The category is " + currentCategory(players.playerList.get(currentPlayer)));
+            System.out.println("The category is " + currentCategory(player));
             askQuestion();
         }
 
     }
 
     private void printCommand(String format) {
-        Player playerName = players.playerList.get(this.currentPlayer);
-        players.print(System.out::println, format, playerName);
+        players.print(System.out::println, format, player);
     }
 
     private void askQuestion() {
-        Player player = players.playerList.get(currentPlayer);
 
         if (currentCategory(player).equals("Pop"))
             System.out.println(popQuestions.removeFirst());
@@ -109,7 +107,6 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         boolean didPlayerWin;
-        Player player = players.playerList.get(currentPlayer);
 
         didPlayerWin = players.isDidPlayerWin(player);
         getNextPlayer();
@@ -120,7 +117,6 @@ public class Game {
         System.out.println("Question was incorrectly answered");
 
         printCommand("%s was sent to the penalty box");
-        Player player = players.playerList.get(this.currentPlayer);
         players.putPlayerInPenaltyBox(player);
 
         getNextPlayer();
@@ -129,9 +125,7 @@ public class Game {
     }
 
     private void getNextPlayer() {
-        currentPlayer++;
-        if (currentPlayer == players.countPlayers()) currentPlayer = 0;
-        presentPlayer = players.fetchNextPlayer();
+        player = players.fetchNextPlayer();
     }
 
 }

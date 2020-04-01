@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 
 public class Players {
 
-    public ArrayList<Player> playerList;
+    private ArrayList<Player> playerList;
     private Queue<Player> playerQueue;
 
 
@@ -82,4 +82,5 @@ public class Players {
         playerQueue.add(currentPlayer);
         return currentPlayer;
     }
+
 }

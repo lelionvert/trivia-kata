@@ -25,7 +25,7 @@ public class Game {
 
     String currentCategory(Player player) {
 
-        switch (players.getIndexCategory(4, player)) {
+        switch (player.place() % 4) {
             case 0:
                 return "Pop";
             case 1:

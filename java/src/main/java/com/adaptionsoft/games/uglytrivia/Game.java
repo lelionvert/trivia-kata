@@ -1,14 +1,11 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 
 public class Game {
     private final Board board;
 
     private Player player = null;
-    public Map<Category, LinkedList<String>> questionsByCategory = new HashMap<>();
     private QuestionBoard questionBoard;
 
     public Game() {
@@ -20,11 +17,9 @@ public class Game {
     }
 
     private void initQuestionBoard() {
-        questionBoard = new QuestionBoard(questionsByCategory);
+        questionBoard = new QuestionBoard();
 
-        questionBoard.initializeQuestionCategories();
-
-        questionBoard.fillQuestionCategories();
+        this.questionBoard.initializeQuestionsCategory();
 
     }
 

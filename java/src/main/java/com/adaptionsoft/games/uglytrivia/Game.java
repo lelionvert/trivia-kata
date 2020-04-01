@@ -38,18 +38,12 @@ public class Game {
         }
     }
 
-    Category currentCategory(Player player) {
+    static Category currentCategory(Player player) {
 
-        switch (player.place() % 4) {
-            case 0:
-                return Category.POP;
-            case 1:
-                return Category.SCIENCE;
-            case 2:
-                return Category.SPORTS;
-            default:
-                return Category.ROCK;
-        }
+        int indexCategory = player.place() % 4;
+        Category currentCategory = Category.values()[indexCategory];
+        return currentCategory;
+
     }
 
     public boolean isPlayable() {

@@ -116,18 +116,22 @@ public class Game {
 
         if (category.getValue().equals(Category.POP.getValue())) {
             String x = popQuestions.removeFirst();
+            x= question;
             System.out.println(x);
         }
         if (category.getValue().equals(Category.SCIENCE.getValue())) {
             String x = scienceQuestions.removeFirst();
+            x= question;
             System.out.println(x);
         }
         if (category.getValue().equals(Category.SPORTS.getValue())) {
             String x = sportsQuestions.removeFirst();
+            x= question;
             System.out.println(x);
         }
         if (category.getValue().equals(Category.ROCK.getValue())) {
             String x = rockQuestions.removeFirst();
+            x= question;
             System.out.println(x);
         }
     }

@@ -113,10 +113,8 @@ public class Game {
         Category category = currentCategory(player);
 
         String question = questionsByCategory.get(category).remove();
+        System.out.println(question);
 
-        if (category.getValue().equals(Category.POP.getValue()) || category.getValue().equals(Category.SCIENCE.getValue()) || category.getValue().equals(Category.SPORTS.getValue()) || category.getValue().equals(Category.ROCK.getValue())) {
-            System.out.println(question);
-        }
     }
 
 

@@ -2,7 +2,6 @@ package com.adaptionsoft.games.uglytrivia;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.function.Consumer;
 
 public class Board {
 
@@ -19,10 +18,6 @@ public class Board {
 
     int countPlayers() {
         return playerQueue.size();
-    }
-
-    void print(Consumer<String> consumer, String format, Player playerName) {
-        consumer.accept(String.format(format, playerName));
     }
 
     public void addInQueue(String player) {

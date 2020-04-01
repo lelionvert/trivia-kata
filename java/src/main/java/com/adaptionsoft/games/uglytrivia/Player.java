@@ -1,6 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class Player {
 
@@ -64,26 +65,33 @@ public class Player {
         if (inPenaltyBox()) {
 
             if (isGettingOutOfPenaltyBox()) {
-                System.out.println("Answer was correct!!!!");
-                earnCoin();
-                System.out.println(this + " now has " + purses() + " Gold Coins.");
-
-                return didPlayerWin();
+                return doesWinWhenCorrectlyAnswered();
             } else {
                 return true;
             }
         } else {
-            System.out.println("Answer was correct!!!!");
-            earnCoin();
-            System.out.println(this + " now has " + purses() + " Gold Coins.");
-
-            return didPlayerWin();
+            return doesWinWhenCorrectlyAnswered();
         }
     }
 
-    boolean didPlayerWin() {
+    private boolean doesWinWhenCorrectlyAnswered() {
+        System.out.println("Answer was correct!!!!");
+        earnCoin();
+        System.out.println(this + " now has " + purses() + " Gold Coins.");
 
-        return !(purses() == 6);
+        return didPlayerWin();
+    }
+
+    boolean didPlayerWin() {
+        return purses() != 6;
+    }
+
+    void print(Consumer<String> consumer, String format) {
+        consumer.accept(String.format(format, this));
+    }
+
+    void printCommand(String format) {
+        print(System.out::println, format);
     }
 
     @Override

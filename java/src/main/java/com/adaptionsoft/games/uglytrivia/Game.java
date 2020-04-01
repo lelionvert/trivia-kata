@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 public class Game {
-    final Board board;
+    private final Board board;
 
     private Player player = null;
     private Map<Category, LinkedList<String>> questionsByCategory = new HashMap<>();
@@ -28,7 +28,6 @@ public class Game {
                     .forEach(category -> questionsByCategory
                             .get(category)
                             .add(category.getValue() + questionIndex));
-
         }
     }
 
@@ -38,55 +37,46 @@ public class Game {
         }
     }
 
-    public boolean isPlayable() {
-        return (board.countPlayers() >= 2);
-    }
-
-    public boolean add(String playerName) {
+    public void add(String playerName) {
 
         board.add(playerName);
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + board.countPlayers());
-        return true;
     }
 
     public void roll(int roll) {
 
-        if (player == null) getNextPlayer();
+        if (player == null) nextPlayer();
 
-        printCommand("%s is the current player");
+        player.printCommand("%s is the current player");
         System.out.println("They have rolled a " + roll);
 
         if (player.inPenaltyBox()) {
             if (roll % 2 != 0) {
 
                 player.gettingOutOfPenaltyBox(true);
-                printCommand("%s is getting out of the penalty box");
+                player.printCommand("%s is getting out of the penalty box");
 
-                int playerNewPlace = player.updatePlace(roll);
-
-                printCommand("%s's new location is " + playerNewPlace);
-                System.out.println("The category is " + Category.currentCategory(player).getValue());
-                askQuestion();
+                move(roll);
             } else {
-                printCommand("%s is not getting out of the penalty box");
+                player.printCommand("%s is not getting out of the penalty box");
                 player.gettingOutOfPenaltyBox(false);
             }
 
         } else {
 
-            int playerNewPlace = player.updatePlace(roll);
-
-            printCommand("%s's new location is " + playerNewPlace);
-            System.out.println("The category is " + Category.currentCategory(player).getValue());
-            askQuestion();
+            move(roll);
         }
 
     }
 
-    private void printCommand(String format) {
-        board.print(System.out::println, format, player);
+    private void move(int roll) {
+        int playerNewPlace = player.updatePlace(roll);
+
+        player.printCommand("%s's new location is " + playerNewPlace);
+        System.out.println("The category is " + Category.currentCategory(player).getValue());
+        askQuestion();
     }
 
     private void askQuestion() {
@@ -99,22 +89,22 @@ public class Game {
         boolean didPlayerWin;
 
         didPlayerWin = player.isDidPlayerWin();
-        getNextPlayer();
+        nextPlayer();
         return didPlayerWin;
     }
 
     public boolean wrongAnswer() {
         System.out.println("Question was incorrectly answered");
 
-        printCommand("%s was sent to the penalty box");
+        player.printCommand("%s was sent to the penalty box");
         player.setPenaltyBox(true);
 
-        getNextPlayer();
+        nextPlayer();
 
         return true;
     }
 
-    private void getNextPlayer() {
+    private void nextPlayer() {
         player = board.fetchNextPlayer();
     }
 

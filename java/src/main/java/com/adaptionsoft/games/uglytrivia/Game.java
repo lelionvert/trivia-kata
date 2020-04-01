@@ -1,7 +1,5 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import java.util.HashMap;
-
 public class Game {
     private final Board board;
 
@@ -9,18 +7,8 @@ public class Game {
     private QuestionBoard questionBoard;
 
     public Game() {
-
-        initQuestionBoard();
-
-        board = new Board();
-
-    }
-
-    private void initQuestionBoard() {
         questionBoard = new QuestionBoard();
-
-        this.questionBoard.initializeQuestionsCategory();
-
+        board = new Board();
     }
 
     public void add(String playerName) {
@@ -45,6 +33,9 @@ public class Game {
                 player.printCommand("%s is getting out of the penalty box");
 
                 move(roll);
+
+                System.out.println("The category is " + Category.currentCategory(player).getValue());
+                questionBoard.askQuestion(player);
             } else {
                 player.printCommand("%s is not getting out of the penalty box");
                 player.gettingOutOfPenaltyBox(false);
@@ -53,6 +44,8 @@ public class Game {
         } else {
 
             move(roll);
+            System.out.println("The category is " + Category.currentCategory(player).getValue());
+            questionBoard.askQuestion(player);
         }
 
     }
@@ -61,8 +54,6 @@ public class Game {
         int playerNewPlace = player.updatePlace(roll);
 
         player.printCommand("%s's new location is " + playerNewPlace);
-        System.out.println("The category is " + Category.currentCategory(player).getValue());
-        questionBoard.askQuestion(player);
     }
 
 

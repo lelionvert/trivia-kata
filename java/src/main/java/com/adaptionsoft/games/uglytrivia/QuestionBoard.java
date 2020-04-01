@@ -11,6 +11,7 @@ public class QuestionBoard {
     public QuestionBoard() {
 
         this.questionsByCategory = new HashMap<>();
+        initializeQuestionsCategory();
     }
 
     void askQuestion(Player player) {
@@ -27,9 +28,7 @@ public class QuestionBoard {
         for (int i = 0; i < 50; i++) {
             String questionIndex = " Question " + i;
             Arrays.stream(Category.values())
-                    .forEach(category -> this.questionsByCategory
-                            .get(category)
-                            .add(category.getValue() + questionIndex));
+                    .forEach(category -> this.questionsByCategory.get(category).add(category.getValue() + questionIndex));
         }
     }
 }

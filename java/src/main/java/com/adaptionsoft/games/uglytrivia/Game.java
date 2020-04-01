@@ -14,10 +14,10 @@ public class Game {
 
     public Game() {
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast("Science Question " + i);
-            sportsQuestions.addLast("Sports Question " + i);
-            rockQuestions.addLast("Rock Question " + i);
+            popQuestions.addLast(Category.POP.getValue() + " Question " + i);
+            scienceQuestions.addLast(Category.SCIENCE.getValue() + " Question " + i);
+            sportsQuestions.addLast(Category.SPORTS.getValue() + " Question " + i);
+            rockQuestions.addLast(Category.ROCK.getValue() + " Question " + i);
         }
         board = new Board();
 
@@ -90,13 +90,15 @@ public class Game {
 
     private void askQuestion() {
 
-        if (currentCategory(player).equals(Category.POP.getValue()))
+        String category = currentCategory(player);
+
+        if (category.equals(Category.POP.getValue()))
             System.out.println(popQuestions.removeFirst());
-        if (currentCategory(player).equals(Category.SCIENCE.getValue()))
+        if (category.equals(Category.SCIENCE.getValue()))
             System.out.println(scienceQuestions.removeFirst());
-        if (currentCategory(player).equals(Category.SPORTS.getValue()))
+        if (category.equals(Category.SPORTS.getValue()))
             System.out.println(sportsQuestions.removeFirst());
-        if (currentCategory(player).equals(Category.ROCK.getValue()))
+        if (category.equals(Category.ROCK.getValue()))
             System.out.println(rockQuestions.removeFirst());
     }
 

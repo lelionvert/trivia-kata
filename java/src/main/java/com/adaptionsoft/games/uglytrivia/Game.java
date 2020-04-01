@@ -38,14 +38,6 @@ public class Game {
         }
     }
 
-    static Category currentCategory(Player player) {
-
-        int indexCategory = player.place() % 4;
-        Category currentCategory = Category.values()[indexCategory];
-        return currentCategory;
-
-    }
-
     public boolean isPlayable() {
         return (board.countPlayers() >= 2);
     }
@@ -75,7 +67,7 @@ public class Game {
                 int playerNewPlace = player.updatePlace(roll);
 
                 printCommand("%s's new location is " + playerNewPlace);
-                System.out.println("The category is " + currentCategory(player).getValue());
+                System.out.println("The category is " + Category.currentCategory(player).getValue());
                 askQuestion();
             } else {
                 printCommand("%s is not getting out of the penalty box");
@@ -87,7 +79,7 @@ public class Game {
             int playerNewPlace = player.updatePlace(roll);
 
             printCommand("%s's new location is " + playerNewPlace);
-            System.out.println("The category is " + currentCategory(player).getValue());
+            System.out.println("The category is " + Category.currentCategory(player).getValue());
             askQuestion();
         }
 
@@ -98,7 +90,7 @@ public class Game {
     }
 
     private void askQuestion() {
-        Category category = currentCategory(player);
+        Category category = Category.currentCategory(player);
         System.out.println(questionsByCategory.get(category).remove());
     }
 

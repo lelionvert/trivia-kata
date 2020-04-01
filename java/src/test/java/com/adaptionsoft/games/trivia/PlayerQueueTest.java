@@ -1,7 +1,7 @@
 package com.adaptionsoft.games.trivia;
 
 import com.adaptionsoft.games.uglytrivia.Player;
-import com.adaptionsoft.games.uglytrivia.Players;
+import com.adaptionsoft.games.uglytrivia.Board;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,17 +11,17 @@ public class PlayerQueueTest {
     @Test
     public void returnsNextPlayerInListPlayersWhenCallingFetchNexPlayerMethod() {
 
-        Players players = new Players();
-        players.addInQueue("Player1");
-        players.addInQueue("Player2");
-        players.addInQueue("Player3");
+        Board board = new Board();
+        board.addInQueue("Player1");
+        board.addInQueue("Player2");
+        board.addInQueue("Player3");
 
-        Player currentPlayer = players.fetchNextPlayer();
+        Player currentPlayer = board.fetchNextPlayer();
         Player expectedPlayer = new Player("Player1");
         assertThat(currentPlayer).isEqualTo(expectedPlayer);
 
 
-        currentPlayer = players.fetchNextPlayer();
+        currentPlayer = board.fetchNextPlayer();
         expectedPlayer = new Player("Player2");
         assertThat(currentPlayer).isEqualTo(expectedPlayer);
 

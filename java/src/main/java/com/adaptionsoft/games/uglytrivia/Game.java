@@ -3,7 +3,7 @@ package com.adaptionsoft.games.uglytrivia;
 import java.util.LinkedList;
 
 public class Game {
-    final Players players;
+    final Board board;
 
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
@@ -19,7 +19,7 @@ public class Game {
             sportsQuestions.addLast(("Sports Question " + i));
             rockQuestions.addLast(createRockQuestion(i));
         }
-        players = new Players();
+        board = new Board();
 
     }
 
@@ -42,15 +42,15 @@ public class Game {
     }
 
     public boolean isPlayable() {
-        return (players.countPlayers() >= 2);
+        return (board.countPlayers() >= 2);
     }
 
     public boolean add(String playerName) {
 
-        players.add(playerName);
+        board.add(playerName);
 
         System.out.println(playerName + " was added");
-        System.out.println("They are player number " + players.countPlayers());
+        System.out.println("They are player number " + board.countPlayers());
         return true;
     }
 
@@ -89,7 +89,7 @@ public class Game {
     }
 
     private void printCommand(String format) {
-        players.print(System.out::println, format, player);
+        board.print(System.out::println, format, player);
     }
 
     private void askQuestion() {
@@ -125,7 +125,7 @@ public class Game {
     }
 
     private void getNextPlayer() {
-        player = players.fetchNextPlayer();
+        player = board.fetchNextPlayer();
     }
 
 }

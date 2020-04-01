@@ -4,12 +4,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.function.Consumer;
 
-public class Players {
+public class Board {
 
     private Queue<Player> playerQueue;
 
 
-    public Players() {
+    public Board() {
         this.playerQueue = new LinkedList<>();
     }
 

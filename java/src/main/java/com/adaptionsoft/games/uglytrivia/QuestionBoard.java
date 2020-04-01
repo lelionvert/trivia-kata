@@ -12,19 +12,19 @@ public class QuestionBoard {
         this.questionsByCategory = questionsByCategory;
     }
 
-    public static void fillQuestionCategories(Map<Category, LinkedList<String>> questionsByCategory) {
+    public void fillQuestionCategories() {
         for (int i = 0; i < 50; i++) {
             String questionIndex = " Question " + i;
             Arrays.stream(Category.values())
-                    .forEach(category -> questionsByCategory
+                    .forEach(category -> this.questionsByCategory
                             .get(category)
                             .add(category.getValue() + questionIndex));
         }
     }
 
-    public static void initializeQuestionCategories(Map<Category, LinkedList<String>> questionsByCategory) {
+    public void initializeQuestionCategories() {
         for (Category category : Category.values()) {
-            questionsByCategory.put(category, new LinkedList<>());
+            this.questionsByCategory.put(category, new LinkedList<>());
         }
     }
 

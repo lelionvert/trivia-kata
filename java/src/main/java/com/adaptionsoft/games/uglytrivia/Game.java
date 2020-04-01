@@ -21,9 +21,10 @@ public class Game {
 
     private void initQuestionBoard() {
         questionBoard = new QuestionBoard(questionsByCategory);
-        QuestionBoard.initializeQuestionCategories(questionsByCategory);
 
-        QuestionBoard.fillQuestionCategories(questionsByCategory);
+        questionBoard.initializeQuestionCategories();
+
+        questionBoard.fillQuestionCategories();
 
     }
 

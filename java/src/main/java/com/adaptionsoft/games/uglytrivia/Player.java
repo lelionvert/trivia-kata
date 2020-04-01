@@ -94,6 +94,40 @@ public class Player {
         print(System.out::println, format);
     }
 
+    void launchRoll(int roll, QuestionBoard questionBoard) {
+
+        printCommand("%s is the current player");
+        System.out.println("They have rolled a " + roll);
+
+        if (inPenaltyBox()) {
+            if (roll % 2 != 0) {
+
+                gettingOutOfPenaltyBox(true);
+                printCommand("%s is getting out of the penalty box");
+
+                move(roll);
+
+                System.out.println("The category is " + Category.currentCategory(this).getValue());
+                questionBoard.askQuestion(this);
+            } else {
+                printCommand("%s is not getting out of the penalty box");
+                gettingOutOfPenaltyBox(false);
+            }
+
+        } else {
+
+            move(roll);
+            System.out.println("The category is " + Category.currentCategory(this).getValue());
+            questionBoard.askQuestion(this);
+        }
+    }
+
+    void move(int roll) {
+        int playerNewPlace = updatePlace(roll);
+
+        printCommand("%s's new location is " + playerNewPlace);
+    }
+
     @Override
     public String toString() {
         return playerName;
@@ -112,9 +146,4 @@ public class Player {
         return Objects.hash(playerName);
     }
 
-    void move(int roll) {
-        int playerNewPlace = updatePlace(roll);
-
-        printCommand("%s's new location is " + playerNewPlace);
-    }
 }

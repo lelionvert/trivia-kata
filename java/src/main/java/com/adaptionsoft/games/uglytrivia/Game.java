@@ -23,36 +23,8 @@ public class Game {
 
         if (player == null) nextPlayer();
 
-        player.printCommand("%s is the current player");
-        System.out.println("They have rolled a " + roll);
+        player.launchRoll(roll, this.questionBoard);
 
-        launchRoll(roll);
-
-    }
-
-    private void launchRoll(int roll) {
-        QuestionBoard questionBoard = this.questionBoard;
-        if (player.inPenaltyBox()) {
-            if (roll % 2 != 0) {
-
-                player.gettingOutOfPenaltyBox(true);
-                player.printCommand("%s is getting out of the penalty box");
-
-                player.move(roll);
-
-                System.out.println("The category is " + Category.currentCategory(player).getValue());
-                questionBoard.askQuestion(player);
-            } else {
-                player.printCommand("%s is not getting out of the penalty box");
-                player.gettingOutOfPenaltyBox(false);
-            }
-
-        } else {
-
-            player.move(roll);
-            System.out.println("The category is " + Category.currentCategory(player).getValue());
-            questionBoard.askQuestion(player);
-        }
     }
 
 

@@ -20,11 +20,11 @@ public class Game {
     }
 
     private void initQuestionBoard() {
+        questionBoard = new QuestionBoard(questionsByCategory);
         QuestionBoard.initializeQuestionCategories(questionsByCategory);
 
         QuestionBoard.fillQuestionCategories(questionsByCategory);
 
-        questionBoard = new QuestionBoard(questionsByCategory);
     }
 
     public void add(String playerName) {
@@ -66,12 +66,7 @@ public class Game {
 
         player.printCommand("%s's new location is " + playerNewPlace);
         System.out.println("The category is " + Category.currentCategory(player).getValue());
-        askQuestion(questionsByCategory, player);
-    }
-
-    private void askQuestion(Map<Category, LinkedList<String>> questionsByCategory, Player player) {
-        Category category = Category.currentCategory(player);
-        System.out.println(questionsByCategory.get(category).remove());
+        questionBoard.askQuestion(player);
     }
 
 

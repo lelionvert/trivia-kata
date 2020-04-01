@@ -10,15 +10,6 @@ public class Player {
     private int place;
     private boolean inPenaltyBox;
 
-    static int calculateNewPlace(int roll, int currentPlace) {
-        int playerNewPlace = currentPlace + roll;
-        if (playerNewPlace > 11) {
-            playerNewPlace = playerNewPlace - 12;
-        }
-        return playerNewPlace;
-    }
-
-
     public Player(String playerName) {
 
         this.playerName = playerName;
@@ -45,6 +36,14 @@ public class Player {
         return place;
     }
 
+    private int calculateNewPlace(int roll, int currentPlace) {
+        int playerNewPlace = currentPlace + roll;
+        if (playerNewPlace > 11) {
+            playerNewPlace = playerNewPlace - 12;
+        }
+        return playerNewPlace;
+    }
+
     public void gettingOutOfPenaltyBox(boolean statePlayerInPenaltyBox) {
         isGettingOutOfPenaltyBox = statePlayerInPenaltyBox;
     }
@@ -59,29 +58,6 @@ public class Player {
 
     public void setPenaltyBox(boolean penaltyState) {
         inPenaltyBox = penaltyState;
-    }
-
-    @Override
-    public String toString() {
-        return playerName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Player player = (Player) o;
-        return Objects.equals(playerName, player.playerName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(playerName);
-    }
-
-    boolean didPlayerWin() {
-
-        return !(purses() == 6);
     }
 
     boolean isDidPlayerWin() {
@@ -104,4 +80,28 @@ public class Player {
             return didPlayerWin();
         }
     }
+
+    boolean didPlayerWin() {
+
+        return !(purses() == 6);
+    }
+
+    @Override
+    public String toString() {
+        return playerName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return Objects.equals(playerName, player.playerName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerName);
+    }
+
 }

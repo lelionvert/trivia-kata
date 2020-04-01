@@ -15,9 +15,9 @@ public class Game {
     public Game() {
         for (int i = 0; i < 50; i++) {
             popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast(("Science Question " + i));
-            sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast(createRockQuestion(i));
+            scienceQuestions.addLast("Science Question " + i);
+            sportsQuestions.addLast("Sports Question " + i);
+            rockQuestions.addLast("Rock Question " + i);
         }
         board = new Board();
 
@@ -27,18 +27,14 @@ public class Game {
 
         switch (player.place() % 4) {
             case 0:
-                return "Pop";
+                return Category.POP.getValue();
             case 1:
-                return "Science";
+                return Category.SCIENCE.getValue();
             case 2:
-                return "Sports";
+                return Category.SPORTS.getValue();
             default:
-                return "Rock";
+                return Category.ROCK.getValue();
         }
-    }
-
-    public String createRockQuestion(int index) {
-        return "Rock Question " + index;
     }
 
     public boolean isPlayable() {
@@ -94,13 +90,13 @@ public class Game {
 
     private void askQuestion() {
 
-        if (currentCategory(player).equals("Pop"))
+        if (currentCategory(player).equals(Category.POP.getValue()))
             System.out.println(popQuestions.removeFirst());
-        if (currentCategory(player).equals("Science"))
+        if (currentCategory(player).equals(Category.SCIENCE.getValue()))
             System.out.println(scienceQuestions.removeFirst());
-        if (currentCategory(player).equals("Sports"))
+        if (currentCategory(player).equals(Category.SPORTS.getValue()))
             System.out.println(sportsQuestions.removeFirst());
-        if (currentCategory(player).equals("Rock"))
+        if (currentCategory(player).equals(Category.ROCK.getValue()))
             System.out.println(rockQuestions.removeFirst());
     }
 

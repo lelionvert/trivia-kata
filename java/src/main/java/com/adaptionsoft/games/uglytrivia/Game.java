@@ -26,13 +26,19 @@ public class Game {
         player.printCommand("%s is the current player");
         System.out.println("They have rolled a " + roll);
 
+        launchRoll(roll);
+
+    }
+
+    private void launchRoll(int roll) {
+        QuestionBoard questionBoard = this.questionBoard;
         if (player.inPenaltyBox()) {
             if (roll % 2 != 0) {
 
                 player.gettingOutOfPenaltyBox(true);
                 player.printCommand("%s is getting out of the penalty box");
 
-                move(roll);
+                player.move(roll);
 
                 System.out.println("The category is " + Category.currentCategory(player).getValue());
                 questionBoard.askQuestion(player);
@@ -43,17 +49,10 @@ public class Game {
 
         } else {
 
-            move(roll);
+            player.move(roll);
             System.out.println("The category is " + Category.currentCategory(player).getValue());
             questionBoard.askQuestion(player);
         }
-
-    }
-
-    private void move(int roll) {
-        int playerNewPlace = player.updatePlace(roll);
-
-        player.printCommand("%s's new location is " + playerNewPlace);
     }
 
 

@@ -112,4 +112,9 @@ public class Player {
         return Objects.hash(playerName);
     }
 
+    void move(int roll) {
+        int playerNewPlace = updatePlace(roll);
+
+        printCommand("%s's new location is " + playerNewPlace);
+    }
 }

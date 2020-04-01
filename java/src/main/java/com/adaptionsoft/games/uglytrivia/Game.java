@@ -1,6 +1,5 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -9,32 +8,23 @@ public class Game {
     private final Board board;
 
     private Player player = null;
-    private Map<Category, LinkedList<String>> questionsByCategory = new HashMap<>();
+    public Map<Category, LinkedList<String>> questionsByCategory = new HashMap<>();
+    private QuestionBoard questionBoard;
 
     public Game() {
 
-        initializeQuestionCategories();
-
-        fillQuestionCategories();
+        initQuestionBoard();
 
         board = new Board();
 
     }
 
-    private void fillQuestionCategories() {
-        for (int i = 0; i < 50; i++) {
-            String questionIndex = " Question " + i;
-            Arrays.stream(Category.values())
-                    .forEach(category -> questionsByCategory
-                            .get(category)
-                            .add(category.getValue() + questionIndex));
-        }
-    }
+    private void initQuestionBoard() {
+        QuestionBoard.initializeQuestionCategories(questionsByCategory);
 
-    private void initializeQuestionCategories() {
-        for (Category category : Category.values()) {
-            questionsByCategory.put(category, new LinkedList<>());
-        }
+        QuestionBoard.fillQuestionCategories(questionsByCategory);
+
+        questionBoard = new QuestionBoard(questionsByCategory);
     }
 
     public void add(String playerName) {
@@ -76,10 +66,10 @@ public class Game {
 
         player.printCommand("%s's new location is " + playerNewPlace);
         System.out.println("The category is " + Category.currentCategory(player).getValue());
-        askQuestion();
+        askQuestion(questionsByCategory, player);
     }
 
-    private void askQuestion() {
+    private void askQuestion(Map<Category, LinkedList<String>> questionsByCategory, Player player) {
         Category category = Category.currentCategory(player);
         System.out.println(questionsByCategory.get(category).remove());
     }

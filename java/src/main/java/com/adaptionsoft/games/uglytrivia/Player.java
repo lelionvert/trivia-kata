@@ -78,4 +78,30 @@ public class Player {
     public int hashCode() {
         return Objects.hash(playerName);
     }
+
+    boolean didPlayerWin() {
+
+        return !(purses() == 6);
+    }
+
+    boolean isDidPlayerWin() {
+        if (inPenaltyBox()) {
+
+            if (isGettingOutOfPenaltyBox()) {
+                System.out.println("Answer was correct!!!!");
+                earnCoin();
+                System.out.println(this + " now has " + purses() + " Gold Coins.");
+
+                return didPlayerWin();
+            } else {
+                return true;
+            }
+        } else {
+            System.out.println("Answer was correct!!!!");
+            earnCoin();
+            System.out.println(this + " now has " + purses() + " Gold Coins.");
+
+            return didPlayerWin();
+        }
+    }
 }

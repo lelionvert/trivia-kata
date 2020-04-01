@@ -64,22 +64,22 @@ public class Game {
         if (player.inPenaltyBox()) {
             if (roll % 2 != 0) {
 
-                players.gettingOutOfPenaltyBox(true, player);
+                player.gettingOutOfPenaltyBox(true);
                 printCommand("%s is getting out of the penalty box");
 
-                int playerNewPlace = players.getPlayerNewPlace(roll, player);
+                int playerNewPlace = player.updatePlace(roll);
 
                 printCommand("%s's new location is " + playerNewPlace);
                 System.out.println("The category is " + currentCategory(player));
                 askQuestion();
             } else {
                 printCommand("%s is not getting out of the penalty box");
-                players.gettingOutOfPenaltyBox(false, player);
+                player.gettingOutOfPenaltyBox(false);
             }
 
         } else {
 
-            int playerNewPlace = players.getPlayerNewPlace(roll, player);
+            int playerNewPlace = player.updatePlace(roll);
 
             printCommand("%s's new location is " + playerNewPlace);
             System.out.println("The category is " + currentCategory(player));
@@ -108,7 +108,7 @@ public class Game {
     public boolean wasCorrectlyAnswered() {
         boolean didPlayerWin;
 
-        didPlayerWin = players.isDidPlayerWin(player);
+        didPlayerWin = player.isDidPlayerWin();
         getNextPlayer();
         return didPlayerWin;
     }
@@ -117,7 +117,7 @@ public class Game {
         System.out.println("Question was incorrectly answered");
 
         printCommand("%s was sent to the penalty box");
-        players.putPlayerInPenaltyBox(player);
+        player.setPenaltyBox(true);
 
         getNextPlayer();
 

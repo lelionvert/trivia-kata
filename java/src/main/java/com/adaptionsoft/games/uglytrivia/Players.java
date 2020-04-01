@@ -16,40 +16,6 @@ public class Players {
         this.playerQueue = new LinkedList<>();
     }
 
-    boolean didPlayerWin(Player player) {
-
-        return !(player.purses() == 6);
-    }
-
-    boolean isDidPlayerWin(Player player) {
-        if (player.inPenaltyBox()) {
-
-            if (player.isGettingOutOfPenaltyBox()) {
-                System.out.println("Answer was correct!!!!");
-                player.earnCoin();
-                System.out.println(player + " now has " + player.purses() + " Gold Coins.");
-
-                return this.didPlayerWin(player);
-            } else {
-                return true;
-            }
-        } else {
-            System.out.println("Answer was correct!!!!");
-            player.earnCoin();
-            System.out.println(player + " now has " + player.purses() + " Gold Coins.");
-
-            return this.didPlayerWin(player);
-        }
-    }
-
-    void putPlayerInPenaltyBox(Player player) {
-        player.setPenaltyBox(true);
-    }
-
-    int getPlayerNewPlace(int roll, Player player) {
-        return player.updatePlace(roll);
-    }
-
     int getIndexCategory(int categoriesCount, Player player) {
 
         return player.place() % categoriesCount;
@@ -67,10 +33,6 @@ public class Players {
 
     void print(Consumer<String> consumer, String format, Player playerName) {
         consumer.accept(String.format(format, playerName));
-    }
-
-    void gettingOutOfPenaltyBox(boolean statePlayerInPenaltyBox, Player player) {
-        player.gettingOutOfPenaltyBox(statePlayerInPenaltyBox);
     }
 
     public void addInQueue(String player) {

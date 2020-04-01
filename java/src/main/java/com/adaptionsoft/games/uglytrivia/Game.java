@@ -1,6 +1,9 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Game {
     final Board board;
@@ -11,29 +14,46 @@ public class Game {
     LinkedList<String> rockQuestions = new LinkedList<>();
 
     private Player player = null;
+    private Map<Category, LinkedList<String>> questionsByCategory = new HashMap<>();
 
     public Game() {
+
+        initializeQuestionCategories();
+
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast(Category.POP.getValue() + " Question " + i);
+            String questionIndex = " Question " + i;
+            popQuestions.addLast(Category.POP.getValue() + questionIndex);
             scienceQuestions.addLast(Category.SCIENCE.getValue() + " Question " + i);
             sportsQuestions.addLast(Category.SPORTS.getValue() + " Question " + i);
             rockQuestions.addLast(Category.ROCK.getValue() + " Question " + i);
+
+            Arrays.stream(Category.values())
+                    .forEach(category -> questionsByCategory
+                            .get(category)
+                            .add(category.getValue() + questionIndex));
+
         }
         board = new Board();
 
     }
 
-    String currentCategory(Player player) {
+    private void initializeQuestionCategories() {
+        for (Category category : Category.values()) {
+            questionsByCategory.put(category, new LinkedList<>());
+        }
+    }
+
+    Category currentCategory(Player player) {
 
         switch (player.place() % 4) {
             case 0:
-                return Category.POP.getValue();
+                return Category.POP;
             case 1:
-                return Category.SCIENCE.getValue();
+                return Category.SCIENCE;
             case 2:
-                return Category.SPORTS.getValue();
+                return Category.SPORTS;
             default:
-                return Category.ROCK.getValue();
+                return Category.ROCK;
         }
     }
 
@@ -66,7 +86,7 @@ public class Game {
                 int playerNewPlace = player.updatePlace(roll);
 
                 printCommand("%s's new location is " + playerNewPlace);
-                System.out.println("The category is " + currentCategory(player));
+                System.out.println("The category is " + currentCategory(player).getValue());
                 askQuestion();
             } else {
                 printCommand("%s is not getting out of the penalty box");
@@ -78,7 +98,7 @@ public class Game {
             int playerNewPlace = player.updatePlace(roll);
 
             printCommand("%s's new location is " + playerNewPlace);
-            System.out.println("The category is " + currentCategory(player));
+            System.out.println("The category is " + currentCategory(player).getValue());
             askQuestion();
         }
 
@@ -90,16 +110,26 @@ public class Game {
 
     private void askQuestion() {
 
-        String category = currentCategory(player);
+        Category category = currentCategory(player);
 
-        if (category.equals(Category.POP.getValue()))
-            System.out.println(popQuestions.removeFirst());
-        if (category.equals(Category.SCIENCE.getValue()))
-            System.out.println(scienceQuestions.removeFirst());
-        if (category.equals(Category.SPORTS.getValue()))
-            System.out.println(sportsQuestions.removeFirst());
-        if (category.equals(Category.ROCK.getValue()))
-            System.out.println(rockQuestions.removeFirst());
+        String question = questionsByCategory.get(category).remove();
+
+        if (category.getValue().equals(Category.POP.getValue())) {
+            String x = popQuestions.removeFirst();
+            System.out.println(x);
+        }
+        if (category.getValue().equals(Category.SCIENCE.getValue())) {
+            String x = scienceQuestions.removeFirst();
+            System.out.println(x);
+        }
+        if (category.getValue().equals(Category.SPORTS.getValue())) {
+            String x = sportsQuestions.removeFirst();
+            System.out.println(x);
+        }
+        if (category.getValue().equals(Category.ROCK.getValue())) {
+            String x = rockQuestions.removeFirst();
+            System.out.println(x);
+        }
     }
 
 
